@@ -163,3 +163,5 @@ SDA   A4
 
 //
 #endif
+
+//platformio lib -g install /root/Arduino/libraries/SD.zip

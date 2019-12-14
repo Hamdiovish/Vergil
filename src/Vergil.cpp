@@ -11,6 +11,8 @@
 #include "CTLSwitchPump.h" 
 #include "CTLLight.h" 
 #include "HUBOut.h"
+#include "CTLLcd.h"
+#include "CTLSd.h"
 
 HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT);
 
@@ -22,7 +24,10 @@ CTLLight*       ctlLight      = new CTLLight(HUB_ENTRY_LIGHT,hubOut);
 
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA,ctlHeater,ctlVentilo);
 SNSDigital*     snsDigital    = new SNSDigital(PIN_ARD_SNS_DGT_LOAD,PIN_ARD_SNS_DGT_SCLK,PIN_ARD_SNS_DGT_DATA,ctlMainPump,ctlSwitchPump);
-   
+
+CTLLcd*         ctlLcd        = new CTLLcd(PIN_ARD_LCD_CS);
+CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS,ctlLcd);
+
 void debug(String message){
   if(DEBUG){
     Serial.print("Vergil: ");
@@ -44,6 +49,10 @@ void setup(){
 
   snsDht11->setup();
   snsDigital->setup();
+
+  ctlLcd->setup();
+  delay(100);
+  ctlSd->setup();
 };
 
 
