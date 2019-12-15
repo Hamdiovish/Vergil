@@ -3,7 +3,7 @@
 
 #include "Config.h"
 #include <DS3231.h>
-#include <ShiftedLCD.h>
+#include "CTLLcd.h"
 
 class CTLRtc {
 

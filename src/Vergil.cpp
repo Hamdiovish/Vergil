@@ -14,6 +14,7 @@
 #include "CTLLcd.h"
 #include "CTLSd.h"
 #include "CTLRtc.h"
+#include "CTLIr.h"
 
 HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT);
 
@@ -29,6 +30,7 @@ SNSDigital*     snsDigital    = new SNSDigital(PIN_ARD_SNS_DGT_LOAD,PIN_ARD_SNS_
 CTLLcd*         ctlLcd        = new CTLLcd(PIN_ARD_LCD_CS);
 CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS,ctlLcd);
 CTLRtc*         ctlRtc        = new CTLRtc(ctlLcd);
+CTLIr*          ctlIr         = new CTLIr(PIN_ARD_IR,ctlLcd);
 
 void debug(String message){
   if(DEBUG){
@@ -53,12 +55,14 @@ void setup(){
   snsDigital->setup();
 
   ctlLcd->setup();
-  ctlSd->setup();
+  //ctlSd->setup();
   ctlRtc->setup();
+  ctlIr->setup();
 };
 
 
 void loop(){
     //snsDht11->loop();
     snsDigital->loop();
+    ctlIr->loop();
 };
