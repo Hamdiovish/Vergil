@@ -62,13 +62,6 @@ class CTLLcd {
         Serial.println(message);      
       }
     }
-    
-    void debug(double message){
-      if(DEBUG){
-        Serial.print("CTLLcd: ");
-        Serial.println(message);      
-      }
-    }
 
 };
 
