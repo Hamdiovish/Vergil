@@ -4,18 +4,18 @@
 bool DEBUG = true;
 ////////// START SYSTEM SPI //////////
 /*
- SPI     ARD
- MOSI     11
- MISO     12 
- CLK|SCK  13
+ SPI     ARD 1284
+ MOSI     11  6
+ MISO     12  7
+ CLK|SCK  13  8
 */
 ////////// END SYSTEM SPI //////////
 
 ////////// START SYSTEM I2C //////////
 /*
- SPI     ARD
- SCL     A5
- SDA     A4 
+ SPI     ARD  1284
+ SCL     A5    22
+ SDA     A4    23
 */
 ////////// END SYSTEM I2C //////////
 
@@ -24,21 +24,21 @@ bool DEBUG = true;
 //CHAIN: http://www.gammon.com.au/forum/?id=11979
 //SPI: http://www.gammon.com.au/forum/?id=11979
 //BITBANG: http://www.gammon.com.au/forum/?id=10892
- HC ARD
- 08 GND
- 16 VCC
- 01 02  PL  LOAD
- 02 03  SPI-CLK  SCK
- 07 04  Q7|   // Serial output (Pin 9) or complementary output (Pin 7) of 74165 is connected to the digital pin 2 of Arduino UNO.
- 15 08  GND
+ HC ARD  1284
+ 08 GND   GND
+ 16 VCC   VCC
+ 01 02  (18) 12  PL  LOAD
+ 02 03  (19) 13  CLK SCK
+ 07 04  (20) 14  Q7|   // Serial output (Pin 9) or complementary output (Pin 7) of 74165 is connected to the digital pin 2 of Arduino UNO.
+ 15 08    GND
  
  03 SNS_DIG_MAIN_PUMP
  04 SNS_DIG_SWITCH_PUMP_TOP
  05 SNS_DIG_SWITCH_PUMP_BOTTOM
 */
-#define PIN_ARD_SNS_DGT_LOAD 2  // SH/LD (Pin 1) of 74165 is connected to the digital pin 7 of Arduino UNO.
-#define PIN_ARD_SNS_DGT_SCLK 3  // CS (Pin 15) of 74165 is connected to the digital pin 8 of Arduino UNO.
-#define PIN_ARD_SNS_DGT_DATA 5
+#define PIN_ARD_SNS_DGT_LOAD 12  // SH/LD (Pin 1) of 74165 is connected to the digital pin 7 of Arduino UNO.
+#define PIN_ARD_SNS_DGT_SCLK 13  // CS (Pin 15) of 74165 is connected to the digital pin 8 of Arduino UNO.
+#define PIN_ARD_SNS_DGT_DATA 14
 
 #define SNS_DGT_MAIN_PUMP          4
 #define SNS_DGT_SWITCH_PUMP_TOP    5
@@ -47,8 +47,12 @@ bool DEBUG = true;
 #define INTERVAL_SNS_DGT  2500
 //////////END DIGITAL INPUT//////////
 
-//////////START DHT////////// 
-#define PIN_ARD_SNS_DHT_DATA A3
+//////////START DHT//////////
+/*
+DHT      ARD     1284
+DATA     A3     (40)A0
+*/
+#define PIN_ARD_SNS_DHT_DATA A0
 
 #define IDL_TEMPERATURE 24
 #define MIN_TEMPERATURE 20
@@ -71,19 +75,19 @@ bool DEBUG = true;
 /*
 //SPI:http://www.gammon.com.au/forum/?id=11518
 //SPI:http://www.gammon.com.au/spi
-HC  ARD
-08: GND
-13: GND
-16: VCC
-10: VCC
-14: 11-SPI DATA
-11: 13-SPI CLK-SPI
-12: 09 RSK LATCH
+HC  ARD      1284
+08: GND      GND
+13: GND      GND
+16: VCC      VCC
+10: VCC      VCC
+14: 11-SPI   6      DATA
+11: 13-SPI   8     CLK-SPI
+12: 09 RSK   (3)2  LATCH
 01: HUB_ENTRY_HEATER
 ..: ..
 */
 #define HUB_OUT_COUNT               1
-#define PIN_ARD_HUB_OUT_SS_LATCH    10
+#define PIN_ARD_HUB_OUT_SS_LATCH    2
 
 #define HUB_ENTRY_HEATER            1
 #define HUB_ENTRY_VENTILO_POWER     2
@@ -104,28 +108,28 @@ HC  LCD
 07  07
 08  GND
 
-HC  ARD
+HC  ARD      1284
 10  VCC
 11  13-SPI
-12  09
+12  9        (2)1
 13  GND | CE:ON/OFF
 14  11-SPI
 16  VCC
 */
-#define PIN_ARD_LCD_CS  9
+#define PIN_ARD_LCD_CS  1
 //////////END LCD - 74HC595 //////////
 
 ////////// SPI: START SD ////////
 /*
-SD    ARD
-CS    08
+SD    ARD       1284
+CS    8         (1)0
 VCC   VCC
 GND   GND
 MOSI  11-SPI
 MISO  12-SPI
 SCK   13-SPI
 */
-#define PIN_ARD_SD_CS  8
+#define PIN_ARD_SD_CS  0
 //////////END SD ////////
 
 ////////// I2C: START RTC DS3231  ////////
@@ -142,23 +146,31 @@ SDA   A4
 
 ////////// START ESP8266  ////////
 /*
-SD    ARD
+SD    ARD   1284
 VCC   VCC
 GND   GND
-SCL   A5
-SDA   A4
+TX     6    (16)10
+RX     7    (17)11
 */
-#define PIN_ARD_ESP_STX 6
-#define PIN_ARD_ESP_RTX 7
+#define PIN_ARD_ESP_STX 10
+#define PIN_ARD_ESP_RTX 11
 //////////END ESP8266 ////////
 
 
 ////////// PWM: START MHZ  ////////
-#define PIN_ARD_MHZ 5
+/*
+MH      ARD     1284
+pmw     5       (4)3
+*/
+#define PIN_ARD_MHZ 3
 //////////END MHZ ////////
 
 ////////// START IR  ////////
-#define PIN_ARD_IR A0
+/*
+IR      ARD     1284
+DATA    A0     (21)15
+*/
+#define PIN_ARD_IR 15
 ////////// END IR ////////
 
 //
