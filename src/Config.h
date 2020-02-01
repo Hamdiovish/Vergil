@@ -40,9 +40,9 @@ bool DEBUG = true;
 #define PIN_ARD_SNS_DGT_SCLK 13  // CS (Pin 15) of 74165 is connected to the digital pin 8 of Arduino UNO.
 #define PIN_ARD_SNS_DGT_DATA 14
 
-#define SNS_DGT_MAIN_PUMP          4
-#define SNS_DGT_SWITCH_PUMP_TOP    5
-#define SNS_DGT_SWITCH_PUMP_BOTTOM 6
+#define SNS_DGT_MAIN_PUMP          3
+#define SNS_DGT_SWITCH_PUMP_TOP    4
+#define SNS_DGT_SWITCH_PUMP_BOTTOM 5
 
 #define INTERVAL_SNS_DGT  2500
 //////////END DIGITAL INPUT//////////
@@ -168,9 +168,9 @@ pmw     5       (4)3
 ////////// START IR  ////////
 /*
 IR      ARD     1284
-DATA    A0     (21)15
+DATA    A0     (29)23
 */
-#define PIN_ARD_IR 15
+#define PIN_ARD_IR 23
 ////////// END IR ////////
 
 //

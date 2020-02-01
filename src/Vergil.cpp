@@ -27,7 +27,8 @@ CTLLight*       ctlLight      = new CTLLight(HUB_ENTRY_LIGHT,hubOut);
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA,ctlHeater,ctlVentilo);
 SNSDigital*     snsDigital    = new SNSDigital(PIN_ARD_SNS_DGT_LOAD,PIN_ARD_SNS_DGT_SCLK,PIN_ARD_SNS_DGT_DATA,ctlMainPump,ctlSwitchPump);
 
-CTLLcd*         ctlLcd        = new CTLLcd(PIN_ARD_LCD_CS);
+LiquidCrystal _lcd(PIN_ARD_LCD_CS);
+CTLLcd*         ctlLcd        = new CTLLcd(&_lcd);
 CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS,ctlLcd);
 CTLRtc*         ctlRtc        = new CTLRtc(ctlLcd);
 CTLIr*          ctlIr         = new CTLIr(PIN_ARD_IR,ctlLcd);
@@ -56,13 +57,13 @@ void setup(){
 
   ctlLcd->setup();
   //ctlSd->setup();
-  ctlRtc->setup();
-  ctlIr->setup();
+  //ctlRtc->setup();
+  //ctlIr->setup();
 };
 
 
 void loop(){
     //snsDht11->loop();
-    snsDigital->loop();
-    ctlIr->loop();
+    //snsDigital->loop();
+    //ctlIr->loop();
 };

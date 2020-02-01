@@ -6,6 +6,8 @@
 #include <SPI.h>
 #include <ShiftPinNo.h>
 
+LiquidCrystal lcd(); 
+
 class CTLLcd {
 
   private:
@@ -16,16 +18,16 @@ class CTLLcd {
   public:
     LiquidCrystal* lcd; 
 
-     CTLLcd(int _ss_pin){
-      ss_pin = _ss_pin;
-      lcd=new LiquidCrystal(ss_pin);
+     CTLLcd(LiquidCrystal* _lcd){
+      lcd=_lcd;
     }
 
      void setup() {
       debug("setup()");
       digitalWrite(ss_pin,HIGH);
       lcd->begin(16, 2);
-      lcd->print("Starting system:");
+      lcd->print("  VERGIL FARM  ");
+      printAt(0,1,"Loading...");
     }
 
 
