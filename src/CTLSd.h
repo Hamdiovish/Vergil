@@ -25,7 +25,7 @@ class CTLSd {
       if (!SD.begin(ss_pin)) {
         debug("initialization failed!");
         lcd->printAt(0,1,"Setup SD failed!");
-        //while (1);
+        while (1);
       }
       debug("initialization done.");
       lcd->printAt(0,1,"Setup SD done!");

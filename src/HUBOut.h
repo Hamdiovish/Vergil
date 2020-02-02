@@ -25,6 +25,7 @@ class HUBOut {
     };
     
   virtual void setup() {
+    sr->allOff();
   }
   
   void on(int pin){
@@ -47,6 +48,15 @@ class HUBOut {
       Serial.print("HUBOut: ");
       Serial.println(message);      
     }
+  }
+
+  void looper(){
+    sr->pinOff(shPin1);
+    //regOne.allOn();
+    delay(1000);
+    sr->pinOn(shPin1);
+    //regOne.allOff();
+    delay(1000);
   }
 };
 

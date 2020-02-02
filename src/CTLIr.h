@@ -26,7 +26,7 @@ class CTLIr {
       debug("setup()");
       ir=new IRrecv(data_pin);
       ir->enableIRIn();
-      lcd->printAt(0,1,"Setup IR done!");
+      lcd->printAt(0,1,"Setup IR done!  ");
     }
 
     void loop(){

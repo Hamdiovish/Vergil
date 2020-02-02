@@ -24,8 +24,8 @@ class CTLRtc {
       debug("setup()");
       rtc->begin();
       lcd->printAt(0,1,"Setup RTC done!");
-      debug(getTimestamp());
-      lcd->printAt(0,1,getTimestamp());
+      String ts = String(getTimestamp());
+      debug(ts);
     }
 
     long getTimestamp(){

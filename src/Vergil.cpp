@@ -56,14 +56,14 @@ void setup(){
   snsDigital->setup();
 
   ctlLcd->setup();
-  //ctlSd->setup();
-  //ctlRtc->setup();
-  //ctlIr->setup();
+  ctlSd->setup();
+  ctlRtc->setup();
+  ctlIr->setup();
 };
 
 
 void loop(){
     //snsDht11->loop();
     //snsDigital->loop();
-    //ctlIr->loop();
+    ctlIr->loop();
 };
