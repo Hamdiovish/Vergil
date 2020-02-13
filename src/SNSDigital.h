@@ -49,39 +49,42 @@ class SNSDigital: public SNSProtocol{
         latestInterval=millis();
         if(shift.update()) // read in all values. returns true if any button has changed
           handleUpdates();
-        delay(1);
     }
   }
     
   void handleUpdates() {
       debug("handleUpdates()");
-      debug("SNS_DGT_MAIN_PUMP:");
-      debugBoolean(shift.state(SNS_DGT_MAIN_PUMP));
-      debug("SNS_DGT_SWITCH_PUMP_TOP:");
-      debugBoolean(shift.state(SNS_DGT_SWITCH_PUMP_TOP));
-      debug("SNS_DGT_SWITCH_PUMP_BOTTOM:");
-      debugBoolean(shift.state(SNS_DGT_SWITCH_PUMP_BOTTOM));
+            
+      if(shift.hasChanged(SNS_DGT_MAIN_PUMP)){
+        debug("SNS_DGT_MAIN_PUMP:");
+        debugBoolean(shift.state(SNS_DGT_MAIN_PUMP));
+        if (shift.state(SNS_DGT_MAIN_PUMP)==1){     
+          ctlMainPump->off();
+        }else{
+          ctlMainPump->on();
+        }      
+      }
 
-     /*
-      if (shift.state(SNS_DGT_MAIN_PUMP)==1){     
-        ctlMainPump->off();
-      }else{
-        ctlMainPump->on();
+      if(shift.hasChanged(SNS_DGT_SWITCH_PUMP_TOP)){
+        debug("SNS_DGT_SWITCH_PUMP_TOP:");
+        debugBoolean(shift.state(SNS_DGT_SWITCH_PUMP_TOP));
+        if (shift.state(SNS_DGT_SWITCH_PUMP_TOP)==1){     
+          ctlSwitchPump->on();
+          ctlMainPump->off();
+        }else{
+          ctlSwitchPump->off();
+        }
       }
     
-      if (shift.state(SNS_DGT_SWITCH_PUMP_TOP)==1){     
-        ctlSwitchPump->on();
-        ctlMainPump->off();
-      }else{
-        ctlSwitchPump->off();
+      if(shift.hasChanged(SNS_DGT_SWITCH_PUMP_BOTTOM)){
+        debug("SNS_DGT_SWITCH_PUMP_BOTTOM:");
+        debugBoolean(shift.state(SNS_DGT_SWITCH_PUMP_BOTTOM));
+        if (shift.state(SNS_DGT_SWITCH_PUMP_BOTTOM)==1){     
+          ctlSwitchPump->off();
+        }else{
+          ctlSwitchPump->on();
+        }
       }
-    
-      if (shift.state(SNS_DGT_SWITCH_PUMP_BOTTOM)==1){     
-        ctlSwitchPump->off();
-      }else{
-        ctlSwitchPump->on();
-      }
-    */
     }
 
   void debug(String message){
@@ -100,3 +103,4 @@ class SNSDigital: public SNSProtocol{
 };
 
 #endif
+//https://infectedbytes.com/2016/07/arduino-shiftin.html
