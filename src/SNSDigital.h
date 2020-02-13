@@ -62,6 +62,7 @@ class SNSDigital: public SNSProtocol{
       debug("SNS_DGT_SWITCH_PUMP_BOTTOM:");
       debugBoolean(shift.state(SNS_DGT_SWITCH_PUMP_BOTTOM));
 
+     /*
       if (shift.state(SNS_DGT_MAIN_PUMP)==1){     
         ctlMainPump->off();
       }else{
@@ -80,7 +81,7 @@ class SNSDigital: public SNSProtocol{
       }else{
         ctlSwitchPump->on();
       }
-    
+    */
     }
 
   void debug(String message){

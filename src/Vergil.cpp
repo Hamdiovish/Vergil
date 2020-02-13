@@ -64,6 +64,6 @@ void setup(){
 
 void loop(){
     //snsDht11->loop();
-    //snsDigital->loop();
+    snsDigital->loop();
     ctlIr->loop();
 };
