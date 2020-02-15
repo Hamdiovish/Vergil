@@ -40,7 +40,7 @@ void debug(String message){
   }
 }
 
-void setup(){
+void _setup(){
   Serial.begin(9600);
   debug("setup()");
 
@@ -62,7 +62,7 @@ void setup(){
 };
 
 
-void loop(){
+void _loop(){
     //snsDht11->loop();
     snsDigital->loop();
     ctlIr->loop();
