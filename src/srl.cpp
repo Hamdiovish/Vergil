@@ -18,7 +18,7 @@ volatile byte relayLed01State = HIGH;
 //SoftwareSerial Serial1(6, 7); // RX, TX
 const char* endLine="#";
 
-void setup(){
+void _setup(){
   Serial1.begin(9600);
   Serial.begin(115200);
   irrecv.enableIRIn();
@@ -123,7 +123,7 @@ void espBusiness(){
   }
 }
   
-void loop(){
+void _loop(){
   irBusiness();
   espBusiness();
 }

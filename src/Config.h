@@ -52,7 +52,7 @@ bool DEBUG = true;
 DHT      ARD     1284
 DATA     A3     (40)A0
 */
-#define PIN_ARD_SNS_DHT_DATA A0
+#define PIN_ARD_SNS_DHT_DATA A7
 
 #define IDL_TEMPERATURE 24
 #define MIN_TEMPERATURE 20
@@ -68,7 +68,7 @@ DATA     A3     (40)A0
 #define CRASH_MIN_HUMIDITY 60
 #define CRASH_MAX_HUMIDITY 95
 
-#define INTERVAL_SNS_DHT 2500
+#define INTERVAL_SNS_DHT 5000
 //////////END DHT//////////
 
 //////////START HUB OUT - 74HC595 //////////
@@ -88,13 +88,15 @@ HC  ARD      1284
 */
 #define HUB_OUT_COUNT               1
 #define PIN_ARD_HUB_OUT_SS_LATCH    2
+#define INTERVAL_CTL_BUZZER  100
 
-#define HUB_ENTRY_HEATER            1
-#define HUB_ENTRY_VENTILO_POWER     2
-#define HUB_ENTRY_VENTILO_DIRECTION 3
-#define HUB_ENTRY_MAIN_PUMP         4
-#define HUB_ENTRY_SWITCH_PUMP       5
-#define HUB_ENTRY_LIGHT             6
+#define HUB_ENTRY_BUZZER                  1
+#define HUB_ENTRY_HEATER            2
+#define HUB_ENTRY_VENTILO_POWER     3
+#define HUB_ENTRY_VENTILO_DIRECTION 4
+#define HUB_ENTRY_MAIN_PUMP         5
+#define HUB_ENTRY_SWITCH_PUMP       6
+#define HUB_ENTRY_LIGHT             7
 //////////END HUB OUT//////////
 
 ////////// SPI: START LCD - 74HC595 ////////
@@ -174,6 +176,9 @@ DATA    A0     (29)23
 ////////// END IR ////////
 
 //
+
+boolean SERIAL_ENABLED = true;
+
 #endif
 
 //platformio lib -g install /root/Arduino/libraries/SD.zip

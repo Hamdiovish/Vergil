@@ -6,11 +6,7 @@
 #include "dht.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h"
-
-bool demo(){  
-  Serial.println("Demo..");
-  return true;
-  }
+#include "CTLLcd.h"
   
 class SNSDht11: public SNSProtocol {
 
@@ -25,10 +21,11 @@ class SNSDht11: public SNSProtocol {
     uint32_t latestInterval;
     bool handlingTemperature;
     bool handlingHumidity;
+    CTLLcd* lcd;
 
   public:
 
-    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo){
+    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo,CTLLcd* _lcd){
       data_pin = _data_pin;
       ctlHeater = _ctlHeater;
       ctlVentilo= _ctlVentilo;
@@ -36,6 +33,7 @@ class SNSDht11: public SNSProtocol {
       latestInterval = 0;
       handlingTemperature=false;
       handlingHumidity=false;
+      lcd=_lcd;
     };
    
     double getTemperature(){
@@ -82,6 +80,12 @@ class SNSDht11: public SNSProtocol {
     if (millis() - latestInterval >= interval) {
         latestInterval=millis();
         DHT.read11(data_pin);
+        String t_unit="C";
+        String h_unit="%";
+        String display=DHT.temperature+t_unit+" - "+DHT.humidity+h_unit;
+        char* dislayStr="";
+        strcpy(dislayStr, display.c_str()); 
+        lcd->printAt(0,1,dislayStr);
         handleTemperature(DHT.temperature);
         handleHumidity(DHT.humidity);
         debug();

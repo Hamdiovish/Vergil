@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "CTLLcd.h"
 #include <IRremote.h>
+#include "HUBOut.h"
 
 class CTLIr {
 
@@ -14,12 +15,14 @@ class CTLIr {
     int data_pin;
     IRrecv* ir;
     decode_results results;
-
+    HUBOut* hubOut;
+  
   public:
 
-    CTLIr(int _data_pin,CTLLcd* _lcd){
+    CTLIr(int _data_pin,CTLLcd* _lcd,HUBOut* _hubOut){
       data_pin=_data_pin;
       lcd=_lcd;
+      hubOut=_hubOut;
     }
 
     void setup() {
@@ -31,9 +34,22 @@ class CTLIr {
 
     void loop(){
       if (ir->decode(&results)){
+        hubOut->buzz();
+        switch(results.value){
+          case 0xFFC23D:{ //Recep button FFC23D "Stop/Resume"
+            if(SERIAL_ENABLED){
+                SERIAL_ENABLED=false;
+                Serial.end();
+              }else{
+                SERIAL_ENABLED=true;
+                Serial.begin(9600);
+              }
+            }
+            break;
+        }
         Serial.println(results.value, HEX);
         ir->resume();
-        }
+      }
     }
 
     void ping(){

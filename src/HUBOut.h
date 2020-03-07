@@ -15,17 +15,24 @@ class HUBOut {
     int count_pin;
     shiftOutX* sr; 
 
+    int buzzer_pin;
+    boolean buzzing=false;
+    uint32_t buzzerInterval;
+    uint32_t buzzerLatestInterval;
+
   public:
 
-    HUBOut(int _ss_latch_pin, int _count_pin){
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
-      
       sr = new shiftOutX( ss_latch_pin, count_pin, MSBFIRST); //SPI
+
+      buzzer_pin = _buzzer_pin;
+      buzzerInterval=INTERVAL_CTL_BUZZER;
     };
     
   virtual void setup() {
-    sr->allOff();
+    this->allOff();
   }
   
   void on(int pin){
@@ -36,6 +43,14 @@ class HUBOut {
   void off(int pin){
     debug("off("+((String)pin)+")");
     sr->pinOff(pin);
+  }
+
+  void allOff(){
+    sr->allOff();
+  }
+
+  void allOn(){
+    sr->allOn();
   }
 
   uint8_t getState(int pin){
@@ -50,14 +65,27 @@ class HUBOut {
     }
   }
 
-  void looper(){
-    sr->pinOff(shPin1);
-    //regOne.allOn();
-    delay(1000);
-    sr->pinOn(shPin1);
-    //regOne.allOff();
-    delay(1000);
+  void treatBuzzer(){
+        if(buzzing){
+          on(buzzer_pin);
+          if (millis() - buzzerLatestInterval >= buzzerInterval) {
+            off(buzzer_pin);
+            buzzing=false;
+          } 
+        }else {
+          buzzerLatestInterval=millis();
+        }
   }
+
+  void buzz() {
+    buzzing=true;
+    debug("buzz()");
+  }
+
+  void loop(){
+    treatBuzzer();
+  }
+
 };
 
 #endif
