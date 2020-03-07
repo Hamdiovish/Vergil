@@ -11,10 +11,10 @@ class CTLSd {
 
     int ss_pin;
     boolean enabled=true;
-    CTLLcd* lcd;
+    CTLMenu* lcd;
   public:
 
-     CTLSd(int _ss_pin,CTLLcd* _lcd){
+     CTLSd(int _ss_pin,CTLMenu* _lcd){
       ss_pin = _ss_pin;
       lcd = _lcd;
     }
@@ -24,11 +24,9 @@ class CTLSd {
       digitalWrite(ss_pin,HIGH);
       if (!SD.begin(ss_pin)) {
         debug("initialization failed!");
-        lcd->printAt(0,1,"Setup SD failed!");
         while (1);
       }
       debug("initialization done.");
-      lcd->printAt(0,1,"Setup SD done!");
     }
 
     void ping(){

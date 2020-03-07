@@ -3,7 +3,7 @@
 
 #include "Config.h"
 #include "CTLRtc.h"
-#include "CTLLcd.h"
+#include "CTLMenu.h"
 
 #include <SPI.h>
 #include <ShiftOutX.h>
@@ -25,13 +25,13 @@ class HUBOut {
   public:
 
     CTLRtc* rtc;
-    CTLLcd* lcd; 
+    CTLMenu* menu; 
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, CTLLcd* _lcd){
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, CTLMenu* _menu){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
       rtc=_rtc;
-      lcd=_lcd;
+      menu=_menu;
 
       sr = new shiftOutX( ss_latch_pin, count_pin, MSBFIRST); //SPI
 
@@ -99,7 +99,8 @@ class HUBOut {
       String s = this->rtc->getTimeFormattedString();
       char* c="";
       strcpy(c,s.c_str());
-      this->lcd->printAt(0,1,c);
+      debug(c);
+      this->menu->updateDisplay("System Time:",c);
   }
 
   void loop(){

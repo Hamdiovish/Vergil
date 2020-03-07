@@ -2,7 +2,7 @@
 #define CTL_IR_H
 
 #include "Config.h"
-#include "CTLLcd.h"
+#include "CTLMenu.h"
 #include <IRremote.h>
 #include "HUBOut.h"
 
@@ -16,10 +16,10 @@ class CTLIr {
     decode_results results;
     HUBOut* hubOut;
     CTLRtc* rtc;
-    CTLLcd* lcd;
+    CTLMenu* lcd;
   public:
 
-    CTLIr(int _data_pin,CTLLcd* _lcd,CTLRtc* _rtc,HUBOut* _hubOut){
+    CTLIr(int _data_pin,CTLMenu* _lcd,CTLRtc* _rtc,HUBOut* _hubOut){
       data_pin=_data_pin;
       hubOut=_hubOut;
       rtc=_rtc;
@@ -30,7 +30,7 @@ class CTLIr {
       debug("setup()");
       ir=new IRrecv(data_pin);
       ir->enableIRIn();
-      hubOut->lcd->printAt(0,1,"Setup IR done!  ");
+      //hubOut->lcd->printAt(0,1,"Setup IR done!  ");
     }
 
     void loop(){

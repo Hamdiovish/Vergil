@@ -5,19 +5,19 @@
 #include <time.h>
 
 #include "Config.h"
-#include "CTLLcd.h"
+#include "CTLMenu.h"
 #include "HUBOut.h"
 
 class COMWifi {
 
     private:
-        CTLLcd* lcd;
+        CTLMenu* lcd;
         HUBOut* hubOut;
         StaticJsonDocument<200> serialData;
   
     public:
 
-        COMWifi(CTLLcd* _lcd,HUBOut* _hubOut){
+        COMWifi(CTLMenu* _lcd,HUBOut* _hubOut){
             lcd=_lcd;
             hubOut=_hubOut;
         }

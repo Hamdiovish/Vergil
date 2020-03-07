@@ -6,7 +6,7 @@
 #include "dht.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h"
-#include "CTLLcd.h"
+#include "CTLMenu.h"
   
 class SNSDht11: public SNSProtocol {
 
@@ -21,11 +21,11 @@ class SNSDht11: public SNSProtocol {
     uint32_t latestInterval;
     bool handlingTemperature;
     bool handlingHumidity;
-    CTLLcd* lcd;
+    CTLMenu* lcd;
 
   public:
 
-    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo,CTLLcd* _lcd){
+    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo,CTLMenu* _lcd){
       data_pin = _data_pin;
       ctlHeater = _ctlHeater;
       ctlVentilo= _ctlVentilo;
@@ -85,7 +85,7 @@ class SNSDht11: public SNSProtocol {
         String display=DHT.temperature+t_unit+" - "+DHT.humidity+h_unit;
         char* dislayStr="";
         strcpy(dislayStr, display.c_str()); 
-        lcd->printAt(0,1,dislayStr);
+        //lcd->printAt(0,1,dislayStr);
         handleTemperature(DHT.temperature);
         handleHumidity(DHT.humidity);
       }
