@@ -88,7 +88,6 @@ class SNSDht11: public SNSProtocol {
         lcd->printAt(0,1,dislayStr);
         handleTemperature(DHT.temperature);
         handleHumidity(DHT.humidity);
-        debug();
       }
     }
 

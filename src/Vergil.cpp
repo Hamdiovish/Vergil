@@ -68,9 +68,9 @@ void setup(){
 
 
 void loop(){
-    snsDht11->loop();
-    hubOut->loop();
-    snsDigital->loop();
+    //snsDht11->loop();
+    //hubOut->loop();
+    //snsDigital->loop();
     ctlIr->loop();
     comWifi->loop();
 };

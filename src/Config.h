@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-bool DEBUG = true;
+bool DEBUG = false;
 ////////// START SYSTEM SPI //////////
 /*
  SPI     ARD 1284

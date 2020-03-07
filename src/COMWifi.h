@@ -28,14 +28,18 @@ class COMWifi {
 
         void loop(){
             if (Serial1.available()>0){
-                char* t = "#";
+                char* t = "/r";
                 Serial.println(">>in:");
                 String s = Serial1.readStringUntil(*t);   // Until CR (Carriage Return)
-                s.replace("#", "");
+                s.trim();
                 Serial.println(s);
 
-                deserializeJson(serialData, s);
-
+                auto error =deserializeJson(serialData, s);
+                if (error) {
+                    Serial.print(F("deserializeJson() failed with code "));
+                    Serial.println(error.c_str());
+                    return;
+                }
                 bool hasFan = serialData.containsKey("fan");
                 bool hasLed = serialData.containsKey("led");
                 bool hasNow = serialData.containsKey("time");
