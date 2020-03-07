@@ -2,6 +2,8 @@
 #define HUB_OUT_H
 
 #include "Config.h"
+#include "CTLRtc.h"
+#include "CTLLcd.h"
 
 #include <SPI.h>
 #include <ShiftOutX.h>
@@ -22,9 +24,15 @@ class HUBOut {
 
   public:
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin){
+    CTLRtc* rtc;
+    CTLLcd* lcd; 
+
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, CTLLcd* _lcd){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
+      rtc=_rtc;
+      lcd=_lcd;
+
       sr = new shiftOutX( ss_latch_pin, count_pin, MSBFIRST); //SPI
 
       buzzer_pin = _buzzer_pin;
@@ -80,6 +88,18 @@ class HUBOut {
   void buzz() {
     buzzing=true;
     debug("buzz()");
+  }
+
+  void updateTime(long time){
+      this->rtc->updateTime(time);
+  }
+  
+  void displayTime(){
+      debug("displayTime()");
+      String s = this->rtc->getTimeFormattedString();
+      char* c="";
+      strcpy(c,s.c_str());
+      this->lcd->printAt(0,1,c);
   }
 
   void loop(){

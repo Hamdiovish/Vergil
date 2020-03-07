@@ -3,43 +3,58 @@
 
 #include "Config.h"
 #include <DS3232RTC.h>
-#include "CTLLcd.h"
 
 class CTLRtc {
 
   private:
 
     DS3232RTC*  rtc;
-    CTLLcd* lcd; 
     boolean enabled=true;
 
   public:
 
-    CTLRtc(CTLLcd* _lcd){
+    CTLRtc(){
       rtc=new DS3232RTC();
-      lcd=_lcd;
     }
 
     void setup() {
       debug("setup()");
       rtc->begin();
-      lcd->printAt(0,1,"Setup RTC done!");
-      //rtc->set((time_t)1583544247);
-      String ts = String(getTimestamp());
-      debug(ts);
+      debug(getTimeFormattedString());
     }
 
 //  printf("%jd seconds since the epoch began\n", (intmax_t)epoch);
 //    printf("%s", asctime(gmtime(&epoch)));
   
+    void updateTime(long time){
+        debug("updateTime()");
+        rtc->set((time_t)time);
+        debug(getTimeFormatted());
+    }
+
     long getTimestamp(){
       debug("getTimestamp()");
+      time_t t = rtc->get();
+      return long(t);
+    }
+
+    char* getTimeFormatted(){
+      debug("getTimeFormatted()");
       time_t t = rtc->get();
       char buf[40];
       sprintf(buf, "%.2d:%.2d:%.2d %.2d%s%d ",
         hour(t), minute(t), second(t), day(t), monthShortStr(month(t)), year(t));
-      debug(buf);
-      return long(t);
+      return buf;
+    }
+
+    String getTimeFormattedString(){
+      debug("getTimeFormattedString()");
+      time_t t = rtc->get();
+      char buf[40];
+      sprintf(buf, "%.2d:%.2d:%.2d %.2d%s%d ",
+        hour(t), minute(t), second(t), day(t), monthShortStr(month(t)), year(t));
+      String s=buf;
+      return s;
     }
 
     void ping(){

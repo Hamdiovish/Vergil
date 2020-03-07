@@ -10,33 +10,35 @@ class CTLIr {
 
   private:
 
-    CTLLcd* lcd; 
     boolean enabled=true;
     int data_pin;
     IRrecv* ir;
     decode_results results;
     HUBOut* hubOut;
-  
+    CTLRtc* rtc;
+    CTLLcd* lcd;
   public:
 
-    CTLIr(int _data_pin,CTLLcd* _lcd,HUBOut* _hubOut){
+    CTLIr(int _data_pin,CTLLcd* _lcd,CTLRtc* _rtc,HUBOut* _hubOut){
       data_pin=_data_pin;
-      lcd=_lcd;
       hubOut=_hubOut;
+      rtc=_rtc;
+      lcd=_lcd;
     }
 
     void setup() {
       debug("setup()");
       ir=new IRrecv(data_pin);
       ir->enableIRIn();
-      lcd->printAt(0,1,"Setup IR done!  ");
+      hubOut->lcd->printAt(0,1,"Setup IR done!  ");
     }
 
     void loop(){
       if (ir->decode(&results)){
-        hubOut->buzz();
         switch(results.value){
           case 0xFFC23D:{ //Recep button FFC23D "Stop/Resume"
+            debug(">>0xFFC23D:");
+            hubOut->buzz();
             if(SERIAL_ENABLED){
                 SERIAL_ENABLED=false;
                 Serial.end();
@@ -44,8 +46,14 @@ class CTLIr {
                 SERIAL_ENABLED=true;
                 Serial.begin(9600);
               }
-            }
             break;
+            };
+            case 0xFF906F:{
+              debug(">>0xFF906F:");
+              hubOut->buzz();
+              hubOut->displayTime();        
+              break;
+            };
         }
         Serial.println(results.value, HEX);
         ir->resume();

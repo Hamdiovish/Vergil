@@ -50,12 +50,8 @@ class COMWifi {
                 if (hasNow){
                     Serial.println("has Now:");
                     timeNow=serialData["time"];
-                    timeNow-= UNIX_OFFSET;
                     Serial.println(timeNow);
-                    time_t t = (time_t)now;
-                    Serial.println(asctime(gmtime(&t)));
-                }else{
-                    Serial.println("no Now.");
+                    hubOut->rtc->updateTime(timeNow);
                 }
                 
                 if(hasFan){

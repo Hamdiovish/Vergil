@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-bool DEBUG = false;
+bool DEBUG = true;
 ////////// START SYSTEM SPI //////////
 /*
  SPI     ARD 1284
@@ -182,3 +182,4 @@ boolean SERIAL_ENABLED = true;
 #endif
 
 //platformio lib -g install /root/Arduino/libraries/SD.zip
+//platformio run --target clean
