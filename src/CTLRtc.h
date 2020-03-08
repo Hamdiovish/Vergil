@@ -3,6 +3,7 @@
 
 #include "Config.h"
 #include <DS3232RTC.h>
+#include "Global.h"
 
 class CTLRtc {
 
@@ -72,17 +73,17 @@ class CTLRtc {
     }
 
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLRtc: ");
         Serial.println(message);      
-      }
+     // }
     }
 
     void debug(long message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLRtc long: ");
         Serial.println(message);      
-      }
+     // }
     }
 
 };

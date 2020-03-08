@@ -5,6 +5,7 @@
 #include "CTLMenu.h"
 #include <IRremote.h>
 #include "HUBOut.h"
+#include "Global.h"
  
 class CTLIr {
 
@@ -41,11 +42,11 @@ class CTLIr {
           case 0xFFC23D:{
             debug(">>0xFFC23D:");
             hubOut->buzz();
-            if(SERIAL_ENABLED){
-                SERIAL_ENABLED=false;
+            if(VG_SERIAL_ENABLED){
+                VG_SERIAL_ENABLED=false;
                 Serial.end();
               }else{
-                SERIAL_ENABLED=true;
+                VG_SERIAL_ENABLED=true;
                 Serial.begin(9600);
               }
             break;
@@ -99,10 +100,10 @@ class CTLIr {
     }
 
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLIr: ");
         Serial.println(message);      
-      }
+     // }
     }
 
 };

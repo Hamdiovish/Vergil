@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "SNSProtocol.h"
 #include "dht.h"
+#include "Global.h"
 
 class SNSMhz19: public SNSProtocol {
 
@@ -32,23 +33,23 @@ class SNSMhz19: public SNSProtocol {
     }
     
     void debug(){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.println("");      
-      }
+      //}
     }    
     
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSMhz19: ");
         Serial.println(message);      
-      }
+    //  }
     }    
     
     void debug(double message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSMhz19: ");
         Serial.println(message);      
-      }
+     // }
     }
 
     unsigned long getCo2(){

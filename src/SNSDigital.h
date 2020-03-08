@@ -10,6 +10,7 @@
 #include "CTLLight.h"
 
 #include <ShiftIn.h>
+#include "Global.h"
 
 class SNSDigital: public SNSProtocol{
 
@@ -88,17 +89,17 @@ class SNSDigital: public SNSProtocol{
     }
 
   void debug(String message){
-    if(DEBUG){
+    //if(VG_DEBUG){
       Serial.print("SNSDigital String: ");
       Serial.println(message);      
-    }
+    //}
   }
   
   void debugBoolean(boolean message){
-    if(DEBUG){
+    //if(VG_DEBUG){
       Serial.print("SNSDigital boolean: ");
       Serial.println(message);      
-    }
+    //}
   }
 };
 

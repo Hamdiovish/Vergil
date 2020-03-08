@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-bool DEBUG = true;
+//#define VG_DEBUG  true
 ////////// START SYSTEM SPI //////////
 /*
  SPI     ARD 1284
@@ -178,7 +178,7 @@ DATA    A0     (29)23
 
 //
 
-boolean SERIAL_ENABLED = true;
+//bool SERIAL_ENABLED = true;
 
 #endif
 

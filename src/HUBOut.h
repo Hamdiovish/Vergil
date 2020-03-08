@@ -7,9 +7,11 @@
 #include <SPI.h>
 #include <ShiftOutX.h>
 #include <ShiftPinNo.h>
-#include "SNSDht11Light.h"
+#include "SNSDht11.h"
 #include "SNSMhz19.h"
+#include "Global.h"
 
+class SNSDht11;
 class HUBOut {
 
   private:
@@ -24,7 +26,7 @@ class HUBOut {
     uint32_t buzzerLatestInterval;
 
   public:
-    SNSDht11Light* dht11;
+    SNSDht11* dht11;
     CTLRtc*   rtc;
     SNSMhz19* mhz;
 
@@ -32,7 +34,7 @@ class HUBOut {
 
     }
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11Light* _dht11,SNSMhz19* _mhz){
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11* _dht11,SNSMhz19* _mhz){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
       rtc=_rtc;
@@ -73,10 +75,10 @@ class HUBOut {
   }
 
   void debug(String message){
-    if(DEBUG){
+    //if(VG_DEBUG){
       Serial.print("HUBOut: ");
       Serial.println(message);      
-    }
+   // }
   }
 
   void treatBuzzer(){

@@ -5,6 +5,7 @@
 #include "SNSDht11.h"
 #include "CTLProtocol.h"
 #include "HUBOut.h"
+#include "Global.h"
  
 class CTLSwitchPump: public CTLProtocol {
 
@@ -49,17 +50,17 @@ class CTLSwitchPump: public CTLProtocol {
     }
 
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTL_SwitchPump: ");
         Serial.println(message);      
-      }
+     // }
     }
     
     void debug(double message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTL_SwitchPump: ");
         Serial.println(message);      
-      }
+     // }
     }
 
 };

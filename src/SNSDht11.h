@@ -6,7 +6,8 @@
 #include "dht.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h"
-#include "CTLMenu.h"
+//#include "CTLMenu.h"
+//#include "Global.h"
   
 class SNSDht11: public SNSProtocol {
 
@@ -21,11 +22,12 @@ class SNSDht11: public SNSProtocol {
     uint32_t latestInterval;
     bool handlingTemperature;
     bool handlingHumidity;
-    CTLMenu* lcd;
+    //CTLMenu* lcd;
 
   public:
 
-    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo,CTLMenu* _lcd){
+    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo//,CTLMenu* _lcd
+    ){
       data_pin = _data_pin;
       ctlHeater = _ctlHeater;
       ctlVentilo= _ctlVentilo;
@@ -33,7 +35,7 @@ class SNSDht11: public SNSProtocol {
       latestInterval = 0;
       handlingTemperature=false;
       handlingHumidity=false;
-      lcd=_lcd;
+      //lcd=_lcd;
     };
    
     double getTemperature(){
@@ -52,23 +54,23 @@ class SNSDht11: public SNSProtocol {
     }
     
     void debug(){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.println("");      
-      }
+     // }
     }    
     
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSDht11: ");
         Serial.println(message);      
-      }
+     // }
     }    
     
     void debug(double message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSDht11: ");
         Serial.println(message);      
-      }
+      //}
     }
 
   public:

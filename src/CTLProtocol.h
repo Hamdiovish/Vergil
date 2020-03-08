@@ -1,7 +1,5 @@
 #ifndef CTLPROTOCOL_H
 #define CTLPROTOCOL_H
-
-#include "HUBOut.h"
  
 class CTLProtocol {
 public:

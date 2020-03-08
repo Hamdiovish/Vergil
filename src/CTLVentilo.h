@@ -3,7 +3,8 @@
 
 #include "Config.h"
 #include "CTLProtocol.h"
-#include "HUBOut.h"
+//#include "HUBOut.h"
+#include "Global.h"
  
  class CTLVentilo:public CTLProtocol {
 
@@ -22,26 +23,28 @@
     int direction_pin;
     int power_pin;
     int standByMs=5000;
-    HUBOut *hubOut;
+    //HUBOut *hubOut;
 
   public:
 
-    CTLVentilo(int _power_pin, int _direction_pin,HUBOut* _hubOut) {
+    CTLVentilo(int _power_pin, int _direction_pin
+    //,HUBOut* _hubOut
+    ) {
       power_pin = _power_pin;
       direction_pin = _direction_pin;
-      hubOut=_hubOut;
+      //hubOut=_hubOut;
     }
     
     virtual void setup() {
     }
 
     virtual void on() {
-      hubOut->on(power_pin);
+      //hubOut->on(power_pin);
       debug("on()");
     }
     
     virtual void off() {
-      hubOut->off(power_pin);
+      //hubOut->off(power_pin);
       debug("off()");
     }
 
@@ -51,7 +54,7 @@
    
     void clockWise(){
       off();
-      hubOut->on(direction_pin);
+      //hubOut->on(direction_pin);
       debug("clockWise()");
       standBy();
       on();
@@ -59,7 +62,7 @@
 
     void antiClockWise(){
       off();
-      hubOut->off(direction_pin);
+      //hubOut->off(direction_pin);
       debug("antiClockWise()");
       standBy();
       on();
@@ -71,10 +74,10 @@
     }
 
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLVentilo: ");
         Serial.println(message);      
-      }
+     // }
     }
 
 };

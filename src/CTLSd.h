@@ -42,17 +42,17 @@ class CTLSd {
     }
 
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLSd: ");
         Serial.println(message);      
-      }
+      //}
     }
     
     void debug(double message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("CTLSd: ");
         Serial.println(message);      
-      }
+      //}
     }
 
 };

@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "SNSProtocol.h"
 #include "dht.h"
+#include "Global.h"
 
 class SNSDht11Light: public SNSProtocol {
 
@@ -43,23 +44,23 @@ class SNSDht11Light: public SNSProtocol {
     }
     
     void debug(){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.println("");      
-      }
+     // }
     }    
     
     void debug(String message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSDht11: ");
         Serial.println(message);      
-      }
+     // }
     }    
     
     void debug(double message){
-      if(DEBUG){
+      //if(VG_DEBUG){
         Serial.print("SNSDht11: ");
         Serial.println(message);      
-      }
+    //  }
     }
 
   public:
