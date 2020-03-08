@@ -11,48 +11,44 @@ boolean defaultScreenShowed=true;
 long lastMs_nextScreen=0;
 long period_nextScreen=3000;
 
-LiquidCrystal* lcd; 
-LiquidMenu* menu;
-LiquidScreen* welcome_screen;
-LiquidScreen* data_screen;
-LiquidScreen* main_screen;
-LiquidScreen* sensors_screen;
-LiquidScreen* settings_screen;
-LiquidScreen* back_screen;
-
-LiquidLine* welcome_line_1;
-LiquidLine* welcome_line_2;
-
-LiquidLine* data_line_1;
-LiquidLine* data_line_2;
-
 char* line1="Data title";
 char* line2="Data value";
 
-LiquidLine* main_option_line_1;
-LiquidLine* main_option_line_2;
-LiquidLine* main_option_line_3;
-LiquidLine* main_option_line_4;
-LiquidLine* main_option_line_5;
-
-LiquidLine* sensors_option_line_1;
-LiquidLine* sensors_option_line_2;
-LiquidLine* sensors_option_line_3;
-LiquidLine* sensors_option_line_4;
-LiquidLine* sensors_option_line_5;
-LiquidLine* sensors_option_line_6;
-LiquidLine* sensors_option_line_7;
-LiquidLine* sensors_option_line_8;
-
-LiquidLine* settings_option_line_1;
-LiquidLine* settings_option_line_2;
-LiquidLine* settings_option_line_3;
-
 HUBOut* _hubOut=NULL;
 
-void blankFunction() {
-  return;
-}
+ LiquidCrystal* lcd; 
+ LiquidMenu* menu;
+ LiquidScreen* welcome_screen;
+ LiquidScreen* data_screen;
+ LiquidScreen* main_screen;
+ LiquidScreen* sensors_screen;
+ LiquidScreen* settings_screen;
+ LiquidScreen* back_screen;
+
+ LiquidLine* welcome_line_1;
+ LiquidLine* welcome_line_2;
+
+ LiquidLine* data_line_1;
+ LiquidLine* data_line_2;
+
+ LiquidLine* main_option_line_1;
+ LiquidLine* main_option_line_2;
+ LiquidLine* main_option_line_3;
+ LiquidLine* main_option_line_4;
+ LiquidLine* main_option_line_5;
+
+ LiquidLine* sensors_option_line_1;
+ LiquidLine* sensors_option_line_2;
+ LiquidLine* sensors_option_line_3;
+ LiquidLine* sensors_option_line_4;
+ LiquidLine* sensors_option_line_5;
+ LiquidLine* sensors_option_line_6;
+ LiquidLine* sensors_option_line_7;
+ LiquidLine* sensors_option_line_8;
+
+ LiquidLine* settings_option_line_1;
+ LiquidLine* settings_option_line_2;
+ LiquidLine* settings_option_line_3;
 
 void selectedIp(){
       Serial.println(">>selectedIp:");
