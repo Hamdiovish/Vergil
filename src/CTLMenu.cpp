@@ -17,6 +17,8 @@ LiquidScreen* welcome_screen;
 LiquidScreen* data_screen;
 LiquidScreen* main_screen;
 LiquidScreen* sensors_screen;
+LiquidScreen* settings_screen;
+LiquidScreen* back_screen;
 
 LiquidLine* welcome_line_1;
 LiquidLine* welcome_line_2;
@@ -42,10 +44,26 @@ LiquidLine* sensors_option_line_6;
 LiquidLine* sensors_option_line_7;
 LiquidLine* sensors_option_line_8;
 
+LiquidLine* settings_option_line_1;
+LiquidLine* settings_option_line_2;
+LiquidLine* settings_option_line_3;
+
 HUBOut* _hubOut=NULL;
 
 void blankFunction() {
   return;
+}
+
+void selectedIp(){
+      Serial.println(">>selectedIp:");
+      line1="IP:";
+      String str= "192.168.4.1";
+      strcpy(line2, str.c_str()); 
+      menu->change_screen(data_screen);
+      menu->update();
+      back_screen=settings_screen;
+      defaultScreenShowed=false;
+      lastMs_nextScreen=millis();
 }
 
 void selectedCo2(){
@@ -57,6 +75,7 @@ void selectedCo2(){
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
+      back_screen=sensors_screen;
       defaultScreenShowed=false;
       lastMs_nextScreen=millis();
 }
@@ -70,6 +89,7 @@ void selectedHumidity(){
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
+      back_screen=sensors_screen;
       defaultScreenShowed=false;
       lastMs_nextScreen=millis();
 }
@@ -83,6 +103,7 @@ void selectedTemperature(){
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
+      back_screen=sensors_screen;
       defaultScreenShowed=false;
       lastMs_nextScreen=millis();
 }
@@ -93,12 +114,18 @@ void selectedTime(){
       _hubOut->displayTime(line2);
       menu->change_screen(data_screen);
       menu->update();
+      back_screen=sensors_screen;
       defaultScreenShowed=false;
       lastMs_nextScreen=millis();
 }
 
 void selectedGoSensors(){
       menu->change_screen(sensors_screen);
+      menu->set_focusedLine(0);
+      menu->update();
+}
+void selectedGoSettings(){
+      menu->change_screen(settings_screen);
       menu->set_focusedLine(0);
       menu->update();
 }
@@ -124,8 +151,8 @@ void selectedGoMain(){
  void CTLMenu::setup() {
   debug("setup()");
 
-  welcome_line_1 = new  LiquidLine(0, 0, "  VERGIL FARM   ");
-  welcome_line_2 = new  LiquidLine(0, 1, "     Hello      ");
+  welcome_line_1 = new  LiquidLine(0, 0, "|    VERGIL    |");
+  welcome_line_2 = new  LiquidLine(0, 1, "|  Auto Farm   |");
   welcome_line_1->attach_function(1, selectedGoMain);
   welcome_line_2->attach_function(1, selectedGoMain);
 
@@ -138,6 +165,7 @@ void selectedGoMain(){
 
   handleMainMenu();
   handleSensorsMenu();
+  handleSettingsMenu();
   
   lcd->begin(16, 2);
 
@@ -185,13 +213,28 @@ void CTLMenu::loop(){
       // Periodic switching to the next screen.
     if (millis() - lastMs_nextScreen > period_nextScreen) {
       lastMs_nextScreen = millis();
-      menu->change_screen(sensors_screen);
+      menu->change_screen(back_screen);
       menu->update();
       defaultScreenShowed=true;
     }
   }
 }
 
+
+void CTLMenu::handleSettingsMenu(){
+  settings_option_line_1 = new  LiquidLine(0, 1, "Ip");
+  settings_option_line_2 = new  LiquidLine(0, 1, "Export Data");
+  settings_option_line_3 = new  LiquidLine(0, 1, "exit");
+  settings_option_line_1->attach_function(1, selectedIp);
+  settings_option_line_2->attach_function(1, blankFunction);
+  settings_option_line_3->attach_function(1, selectedGoMain);
+  settings_screen = new LiquidScreen();
+  settings_screen->add_line(*settings_option_line_1);
+  settings_screen->add_line(*settings_option_line_2);
+  settings_screen->add_line(*settings_option_line_3);
+  settings_screen->set_displayLineCount(2);
+  menu->add_screen(*settings_screen);  
+}
 
 void CTLMenu::handleMainMenu(){
   main_option_line_1 = new  LiquidLine(0, 1, "Sensors");
@@ -202,7 +245,7 @@ void CTLMenu::handleMainMenu(){
   main_option_line_1->attach_function(1, selectedGoSensors);
   main_option_line_2->attach_function(1, blankFunction);
   main_option_line_3->attach_function(1, blankFunction);
-  main_option_line_4->attach_function(1, blankFunction);
+  main_option_line_4->attach_function(1, selectedGoSettings);
   main_option_line_5->attach_function(1, selectedGoWelcome);
   main_screen = new LiquidScreen();
   main_screen->add_line(*main_option_line_1);

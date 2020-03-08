@@ -47,6 +47,8 @@ class CTLMenu{
 
     void handleSensorsMenu();
 
+    void handleSettingsMenu();
+
     void ok();
 
     void up();
