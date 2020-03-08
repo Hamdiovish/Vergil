@@ -3,7 +3,7 @@
 
 #include <LiquidMenu.h>
 #include "HUBOut.h"
-#include "SNSDht11Light.h"
+#include "SNSDht11.h"
 #include "Config.h"
 #include "Global.h"
 

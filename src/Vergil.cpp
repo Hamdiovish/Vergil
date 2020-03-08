@@ -7,7 +7,7 @@
 #include "CTLVentilo.h" 
 
 #include "SNSDht11.h"
-#include "SNSDht11Light.h"
+#include "SNSDht11.h"
 #include "SNSMhz19.h"
 #include "SNSDigital.h"
 
