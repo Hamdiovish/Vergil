@@ -3,8 +3,9 @@
 
 #include "Config.h"
 #include "CTLProtocol.h"
+#include <Arduino.h>
+
 //#include "HUBOut.h"
-#include "Global.h"
  
  class CTLVentilo:public CTLProtocol {
 
@@ -29,56 +30,23 @@
 
     CTLVentilo(int _power_pin, int _direction_pin
     //,HUBOut* _hubOut
-    ) {
-      power_pin = _power_pin;
-      direction_pin = _direction_pin;
-      //hubOut=_hubOut;
-    }
+    );
     
-    virtual void setup() {
-    }
+    virtual void setup();
 
-    virtual void on() {
-      //hubOut->on(power_pin);
-      debug("on()");
-    }
+    virtual void on();
     
-    virtual void off() {
-      //hubOut->off(power_pin);
-      debug("off()");
-    }
+    virtual void off();
 
-   virtual void ping(){
-     debug("PING()");
-   }
+   virtual void ping();
    
-    void clockWise(){
-      off();
-      //hubOut->on(direction_pin);
-      debug("clockWise()");
-      standBy();
-      on();
-    }
+    void clockWise();
 
-    void antiClockWise(){
-      off();
-      //hubOut->off(direction_pin);
-      debug("antiClockWise()");
-      standBy();
-      on();
-    }
+    void antiClockWise();
     
-    void standBy(){
-     debug("standBy()");
-     delay(standByMs);
-    }
+    void standBy();
 
-    void debug(String message){
-      //if(VG_DEBUG){
-        Serial.print("CTLVentilo: ");
-        Serial.println(message);      
-     // }
-    }
+    void debug(String message);
 
 };
 

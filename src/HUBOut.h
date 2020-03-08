@@ -2,12 +2,12 @@
 #define HUB_OUT_H
 
 #include "Config.h"
+#include "SNSDht11.h"
 #include "CTLRtc.h"
 
 #include <SPI.h>
 #include <ShiftOutX.h>
 #include <ShiftPinNo.h>
-#include "SNSDht11.h"
 #include "SNSMhz19.h"
 #include "Global.h"
 

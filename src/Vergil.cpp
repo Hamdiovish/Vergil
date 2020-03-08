@@ -3,12 +3,14 @@
 #include "CTLProtocol.h"
 #include "SNSProtocol.h" 
 
+#include "CTLHeater.h" 
+#include "CTLVentilo.h" 
+
 #include "SNSDht11.h"
 #include "SNSDht11Light.h"
 #include "SNSMhz19.h"
 #include "SNSDigital.h"
-#include "CTLVentilo.h" 
-#include "CTLHeater.h" 
+
 #include "CTLMainPump.h" 
 #include "CTLSwitchPump.h" 
 #include "CTLLight.h" 
@@ -20,6 +22,7 @@
 #include <LiquidMenu.h>
 #include "CTLMenu.h"
 #include "Global.h"
+#include "VergilHelper.h"
 
 LiquidCrystal _lcd(PIN_ARD_LCD_CS);
 LiquidMenu    _menu(_lcd);
@@ -30,10 +33,11 @@ CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,M
 CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION
 //,hubOut
 );
-CTLRtc*         ctlRtc        = new CTLRtc();
-CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
 
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA,ctlHeater,ctlVentilo);
+
+CTLRtc*         ctlRtc        = new CTLRtc();
+CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
 
 SNSMhz19*       snsMhz        = new SNSMhz19(PIN_ARD_MHZ);
 
