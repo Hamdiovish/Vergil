@@ -1,8 +1,8 @@
 #include "CTLVentilo.h"
 #include "Config.h"
 #include "CTLProtocol.h"
-//#include "HUBOut.h"
-//#include "Global.h"
+#include "HUBOut.h"
+#include "Global.h"
 
   /*Relay connection:
   RED: UP: NC
@@ -14,30 +14,24 @@
   Anti-Clockwise->Air from motor->In ->direction_pin:LOW
   */
   
-  int direction_pin;
-  int power_pin;
-  int standByMs=5000;
-  //HUBOut *hubOut;
+ 
 
-
-  CTLVentilo::CTLVentilo(int _power_pin, int _direction_pin
-  //,HUBOut* _hubOut
-  ) {
+  CTLVentilo::CTLVentilo(int _power_pin, int _direction_pin,HUBOut* _hubOut) {
     power_pin = _power_pin;
     direction_pin = _direction_pin;
-    //hubOut=_hubOut;
+    hubOut=_hubOut;
   }
   
    void CTLVentilo::setup() {
   }
 
    void CTLVentilo::on() {
-    //hubOut->on(power_pin);
+    hubOut->on(power_pin);
     debug("on()");
   }
   
    void CTLVentilo::off() {
-    //hubOut->off(power_pin);
+    hubOut->off(power_pin);
     debug("off()");
   }
 
@@ -47,7 +41,7 @@
   
   void CTLVentilo::clockWise(){
     off();
-    //hubOut->on(direction_pin);
+    hubOut->on(direction_pin);
     debug("clockWise()");
     standBy();
     on();
@@ -55,7 +49,7 @@
 
   void CTLVentilo::antiClockWise(){
     off();
-    //hubOut->off(direction_pin);
+    hubOut->off(direction_pin);
     debug("antiClockWise()");
     standBy();
     on();

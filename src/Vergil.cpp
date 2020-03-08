@@ -27,23 +27,20 @@
 LiquidCrystal _lcd(PIN_ARD_LCD_CS);
 LiquidMenu    _menu(_lcd);
 
-CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE
-//,hubOut
-); 
-CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION
-//,hubOut
-);
+CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE,hubOut); 
+CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION,hubOut);
 
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA,ctlHeater,ctlVentilo);
 
-CTLRtc*         ctlRtc        = new CTLRtc();
-CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
-
 SNSMhz19*       snsMhz        = new SNSMhz19(PIN_ARD_MHZ);
 
-HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,snsDht11,snsMhz);
-CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu,hubOut);
+CTLRtc*         ctlRtc        = new CTLRtc();
 
+CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
+
+HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,snsDht11,snsMhz);
+
+CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu,hubOut);
 
 CTLMainPump*    ctlMainPump   = new CTLMainPump(HUB_ENTRY_MAIN_PUMP,hubOut);
 CTLSwitchPump*  ctlSwitchPump = new CTLSwitchPump(HUB_ENTRY_SWITCH_PUMP,hubOut);

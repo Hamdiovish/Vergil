@@ -7,6 +7,7 @@
 
 //#include "HUBOut.h"
  
+ class HUBOut;
  class CTLVentilo:public CTLProtocol {
 
   private:
@@ -21,15 +22,15 @@
     Anti-Clockwise->Air from motor->In ->direction_pin:LOW
     */
     
-    int direction_pin;
-    int power_pin;
-    int standByMs=5000;
-    //HUBOut *hubOut;
+  int direction_pin;
+  int power_pin;
+  int standByMs=5000;
+  HUBOut* hubOut;
+
 
   public:
 
-    CTLVentilo(int _power_pin, int _direction_pin
-    //,HUBOut* _hubOut
+    CTLVentilo(int _power_pin, int _direction_pin,HUBOut* _hubOut
     );
     
     virtual void setup();

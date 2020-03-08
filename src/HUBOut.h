@@ -11,7 +11,6 @@
 #include "SNSMhz19.h"
 #include "Global.h"
 
-class SNSDht11;
 class HUBOut {
 
   private:
