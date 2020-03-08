@@ -5,6 +5,7 @@
 
 #include "SNSDht11.h"
 #include "SNSDht11Light.h"
+#include "SNSMhz19.h"
 #include "SNSDigital.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h" 
@@ -24,9 +25,10 @@ LiquidMenu    _menu(_lcd);
 
 CTLRtc*         ctlRtc        = new CTLRtc();
 CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
-SNSDht11Light*  snsDht11Light  = new SNSDht11Light(PIN_ARD_SNS_DHT_DATA);
+SNSDht11Light*  snsDht11Light = new SNSDht11Light(PIN_ARD_SNS_DHT_DATA);
+SNSMhz19*       snsMhz        = new SNSMhz19(PIN_ARD_MHZ);
 
-HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,snsDht11Light);
+HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,snsDht11Light,snsMhz);
 CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu,hubOut);
 
 CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE,hubOut); 
@@ -69,6 +71,7 @@ void setup(){
   ctlRtc->setup();
   ctlIr->setup();
 
+  snsMhz->setup();
   comWifi->setup();
 };
 

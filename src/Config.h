@@ -165,6 +165,7 @@ MH      ARD     1284
 pmw     5       (4)3
 */
 #define PIN_ARD_MHZ 3
+#define INTERVAL_SNS_MHZ 5000
 //////////END MHZ ////////
 
 ////////// START IR  ////////

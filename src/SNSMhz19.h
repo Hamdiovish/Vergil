@@ -1,11 +1,11 @@
-#ifndef SNSDHT11LIGHT_H
-#define SNSDHT11LIGHT_H
+#ifndef SNSMhz19LIGHT_H
+#define SNSMhz19LIGHT_H
 
 #include "Config.h"
 #include "SNSProtocol.h"
 #include "dht.h"
 
-class SNSDht11Light: public SNSProtocol {
+class SNSMhz19: public SNSProtocol {
 
   private:
   
@@ -17,25 +17,14 @@ class SNSDht11Light: public SNSProtocol {
     bool handlingHumidity;
 
   public:
-    dht DHT;
 
-    SNSDht11Light(int _data_pin){
+    SNSMhz19(int _data_pin){
       data_pin = _data_pin;
-      interval=INTERVAL_SNS_DHT;
+      interval=INTERVAL_SNS_MHZ;
       latestInterval = 0;
       handlingTemperature=false;
       handlingHumidity=false;
     };
-   
-    double getTemperature(){
-      DHT.read11(data_pin);
-      return DHT.temperature;
-    }
-    
-    double getHumidity(){
-      DHT.read11(data_pin);
-      return DHT.humidity;
-    }
 
     void standBy(){
      debug("standBy()");
@@ -50,21 +39,30 @@ class SNSDht11Light: public SNSProtocol {
     
     void debug(String message){
       if(DEBUG){
-        Serial.print("SNSDht11: ");
+        Serial.print("SNSMhz19: ");
         Serial.println(message);      
       }
     }    
     
     void debug(double message){
       if(DEBUG){
-        Serial.print("SNSDht11: ");
+        Serial.print("SNSMhz19: ");
         Serial.println(message);      
       }
     }
 
-  public:
-  
+    unsigned long getCo2(){
+      unsigned long th,tl,ppm=0;
+        do {
+          th = pulseIn(data_pin, HIGH, 1004000) / 1000;
+          tl = 1004 - th;
+          ppm = 2000 * (th-2)/(th+tl-4);
+        } while (th == 0);
+        return ppm;
+    }
+
   virtual void setup() {
+      pinMode(data_pin, INPUT);
     }
 
   virtual void loop(){

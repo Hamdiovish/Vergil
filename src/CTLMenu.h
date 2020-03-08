@@ -48,6 +48,19 @@ void blankFunction() {
   return;
 }
 
+void selectedCo2(){
+      Serial.println(">>selectedCo2:");
+      line1="Co2:";
+      double co2=_hubOut->mhz->getCo2();
+      String str= String(co2);
+      str+="ppm";
+      strcpy(line2, str.c_str()); 
+      menu->change_screen(data_screen);
+      menu->update();
+      defaultScreenShowed=false;
+      lastMs_nextScreen=millis();
+}
+
 void selectedHumidity(){
       Serial.println(">>selectedHumidity:");
       line1="Humidity:";
@@ -217,7 +230,7 @@ class CTLMenu{
       sensors_option_line_1->attach_function(1, selectedTime);
       sensors_option_line_2->attach_function(1, selectedTemperature);
       sensors_option_line_3->attach_function(1, selectedHumidity);
-      sensors_option_line_4->attach_function(1, blankFunction);
+      sensors_option_line_4->attach_function(1, selectedCo2);
       sensors_option_line_5->attach_function(1, blankFunction);
       sensors_option_line_6->attach_function(1, blankFunction);
       sensors_option_line_7->attach_function(1, blankFunction);

@@ -8,6 +8,7 @@
 #include <ShiftOutX.h>
 #include <ShiftPinNo.h>
 #include "SNSDht11Light.h"
+#include "SNSMhz19.h"
 
 class HUBOut {
 
@@ -24,13 +25,14 @@ class HUBOut {
 
   public:
     SNSDht11Light* dht11;
-    CTLRtc* rtc;
-    
+    CTLRtc*   rtc;
+    SNSMhz19* mhz;
+
     HUBOut(){
 
     }
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11Light* _dht11){
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11Light* _dht11,SNSMhz19* _mhz){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
       rtc=_rtc;
@@ -40,6 +42,7 @@ class HUBOut {
       buzzer_pin = _buzzer_pin;
       buzzerInterval=INTERVAL_CTL_BUZZER;
       dht11=_dht11;
+      mhz=_mhz;
     };
     
   virtual void setup() {
