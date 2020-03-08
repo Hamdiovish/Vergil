@@ -4,9 +4,7 @@
 #include <Arduino.h>
 #include "Config.h"
 #include "CTLProtocol.h"
-//#include "HUBOut.h"
  
-class HUBOut;
 class CTLHeater: public CTLProtocol {
 
   private:
@@ -18,14 +16,12 @@ class CTLHeater: public CTLProtocol {
     int idl_temperature;
     int min_temperature;
     int max_temperature;
-
-    HUBOut* hubOut;
     
     boolean enabled;
 
   public:
 
-    CTLHeater(int _power_pin,int _idl_temperature, int _min_temperature, int _max_temperature,HUBOut* hubOut);
+    CTLHeater(int _power_pin,int _idl_temperature, int _min_temperature, int _max_temperature);
 
     virtual void setup();
     virtual void on();

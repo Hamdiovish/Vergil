@@ -16,10 +16,9 @@
   
  
 
-  CTLVentilo::CTLVentilo(int _power_pin, int _direction_pin,HUBOut* _hubOut) {
+  CTLVentilo::CTLVentilo(int _power_pin, int _direction_pin) {
     power_pin = _power_pin;
     direction_pin = _direction_pin;
-    hubOut=_hubOut;
   }
   
    void CTLVentilo::setup() {

@@ -4,17 +4,16 @@
 #include "HUBOut.h"
 #include "SNSDht11.h"
 #include "Global.h"
+#include "Injector.h"
 
 
 boolean enabled=true;
-boolean defaultScreenShowed=true;
+boolean autoBackstepRequest=false;
 long lastMs_nextScreen=0;
 long period_nextScreen=3000;
 
 char* line1="Data title";
 char* line2="Data value";
-
-HUBOut* _hubOut=NULL;
 
  LiquidCrystal* lcd; 
  LiquidMenu* menu;
@@ -50,98 +49,119 @@ HUBOut* _hubOut=NULL;
  LiquidLine* settings_option_line_2;
  LiquidLine* settings_option_line_3;
 
-void selectedIp(){
-      Serial.println(">>selectedIp:");
+void selectedOptionIp(){
+      Serial.println(">>selectedOptionIp:");
       line1="IP:";
       String str= "192.168.4.1";
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
       back_screen=settings_screen;
-      defaultScreenShowed=false;
+      autoBackstepRequest=true;
       lastMs_nextScreen=millis();
 }
 
 void selectedCo2(){
       Serial.println(">>selectedCo2:");
       line1="Co2:";
-      double co2=_hubOut->mhz->getCo2();
+      double co2=snsMhz->getCo2();
       String str= String(co2);
       str+="ppm";
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
       back_screen=sensors_screen;
-      defaultScreenShowed=false;
+      autoBackstepRequest=true;
       lastMs_nextScreen=millis();
 }
 
 void selectedHumidity(){
       Serial.println(">>selectedHumidity:");
       line1="Humidity:";
-      double display=_hubOut->dht11->getHumidity();
+      double display=snsDht11->getHumidity();
       String str= String(display);
       str+="%";
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
       back_screen=sensors_screen;
-      defaultScreenShowed=false;
+      autoBackstepRequest=true;
       lastMs_nextScreen=millis();
 }
 
 void selectedTemperature(){
       Serial.println(">>selectedTemperature:");
       line1="Temperature:";
-      double display=_hubOut->dht11->getTemperature();
+      double display=snsDht11->getTemperature();
       String str= String(display);
       str+="C";
       strcpy(line2, str.c_str()); 
       menu->change_screen(data_screen);
       menu->update();
       back_screen=sensors_screen;
-      defaultScreenShowed=false;
+      autoBackstepRequest=true;
       lastMs_nextScreen=millis();
 }
 
 void selectedTime(){
       Serial.println(">>selectedTime:");
       line1="Time:";
-      _hubOut->displayTime(line2);
+      hubOut->displayTime(line2);
       menu->change_screen(data_screen);
       menu->update();
       back_screen=sensors_screen;
-      defaultScreenShowed=false;
+      autoBackstepRequest=true;
       lastMs_nextScreen=millis();
 }
 
 void selectedGoSensors(){
+      Serial.println(">>selectedGoSensors():");
       menu->change_screen(sensors_screen);
       menu->set_focusedLine(0);
       menu->update();
 }
 void selectedGoSettings(){
+      Serial.println(">>selectedGoSettings():");
       menu->change_screen(settings_screen);
       menu->set_focusedLine(0);
       menu->update();
 }
 
 void selectedGoWelcome(){
+      Serial.println(">>selectedGoWelcome():");
       menu->change_screen(welcome_screen);
       menu->set_focusedLine(0);
       menu->update();
 }
 
+void selectedSettingsExit(){
+      Serial.println(">>selectedSettingsExit():");
+      menu->change_screen(main_screen);
+      menu->update();
+}
+
+void selectedSensorsExit(){
+      Serial.println(">>selectedSensorsExit():");
+      menu->change_screen(main_screen);
+      menu->update();
+}
+
+void selectedMainExit(){
+      Serial.println(">>selectedMainExit():");
+      menu->change_screen(welcome_screen);
+      menu->update();
+}
+
 void selectedGoMain(){
+      Serial.println(">>selectedGoMain():");
       menu->change_screen(main_screen);
       menu->set_focusedLine(0);
       menu->update();
 }
 
- CTLMenu::CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu,HUBOut* __hubOut){
+ CTLMenu::CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu){
   lcd=_lcd;
   menu=_menu;
-  _hubOut=__hubOut;
 }
 
  void CTLMenu::setup() {
@@ -167,7 +187,7 @@ void selectedGoMain(){
 
   menu->add_screen(*welcome_screen);
   menu->add_screen(*data_screen);
-  menu->change_screen(main_screen);
+  menu->change_screen(welcome_screen);
   menu->set_focusedLine(0);
   menu->update();
 }
@@ -191,27 +211,26 @@ void CTLMenu::updateDisplay(char* l1, char* l2){
   line2=l2;
   menu->change_screen(data_screen);
   menu->update();
-  defaultScreenShowed=false;
+  autoBackstepRequest=true;
   lastMs_nextScreen=millis();
 }
 
 void CTLMenu::updateDisplayTmp(){
   line1="Time:";
-  _hubOut->displayTime(line2);
+  hubOut->displayTime(line2);
   menu->change_screen(data_screen);
   menu->update();
-  defaultScreenShowed=false;
+  autoBackstepRequest=true;
   lastMs_nextScreen=millis();
 }
 
 void CTLMenu::loop(){
-  if(defaultScreenShowed==false){
-      // Periodic switching to the next screen.
+  if(autoBackstepRequest==true){
     if (millis() - lastMs_nextScreen > period_nextScreen) {
       lastMs_nextScreen = millis();
       menu->change_screen(back_screen);
       menu->update();
-      defaultScreenShowed=true;
+      autoBackstepRequest=false;
     }
   }
 }
@@ -221,9 +240,9 @@ void CTLMenu::handleSettingsMenu(){
   settings_option_line_1 = new  LiquidLine(0, 1, "Ip");
   settings_option_line_2 = new  LiquidLine(0, 1, "Export Data");
   settings_option_line_3 = new  LiquidLine(0, 1, "exit");
-  settings_option_line_1->attach_function(1, selectedIp);
+  settings_option_line_1->attach_function(1, selectedOptionIp);
   settings_option_line_2->attach_function(1, blankFunction);
-  settings_option_line_3->attach_function(1, selectedGoMain);
+  settings_option_line_3->attach_function(1, selectedSettingsExit);
   settings_screen = new LiquidScreen();
   settings_screen->add_line(*settings_option_line_1);
   settings_screen->add_line(*settings_option_line_2);
@@ -242,7 +261,7 @@ void CTLMenu::handleMainMenu(){
   main_option_line_2->attach_function(1, blankFunction);
   main_option_line_3->attach_function(1, blankFunction);
   main_option_line_4->attach_function(1, selectedGoSettings);
-  main_option_line_5->attach_function(1, selectedGoWelcome);
+  main_option_line_5->attach_function(1, selectedMainExit);
   main_screen = new LiquidScreen();
   main_screen->add_line(*main_option_line_1);
   main_screen->add_line(*main_option_line_2);
@@ -269,7 +288,7 @@ void CTLMenu::handleSensorsMenu(){
   sensors_option_line_5->attach_function(1, blankFunction);
   sensors_option_line_6->attach_function(1, blankFunction);
   sensors_option_line_7->attach_function(1, blankFunction);
-  sensors_option_line_8->attach_function(1, selectedGoMain);
+  sensors_option_line_8->attach_function(1, selectedSensorsExit);
   sensors_screen = new LiquidScreen();
   sensors_screen->add_line(*sensors_option_line_1);
   sensors_screen->add_line(*sensors_option_line_2);

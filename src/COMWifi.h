@@ -7,19 +7,16 @@
 #include "Config.h"
 #include "CTLMenu.h"
 #include "HUBOut.h"
+#include "Injector.h"
 
 class COMWifi {
 
     private:
-        CTLMenu* lcd;
-        HUBOut* hubOut;
         StaticJsonDocument<200> serialData;
   
     public:
 
-        COMWifi(CTLMenu* _lcd,HUBOut* _hubOut){
-            lcd=_lcd;
-            hubOut=_hubOut;
+        COMWifi(){
         }
 
         void setup(){
@@ -51,7 +48,7 @@ class COMWifi {
                     Serial.println("has Now:");
                     timeNow=serialData["time"];
                     Serial.println(timeNow);
-                    hubOut->rtc->updateTime(timeNow);
+                    ctlRtc->updateTime(timeNow);
                 }
                 
                 if(hasFan){

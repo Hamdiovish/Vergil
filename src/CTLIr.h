@@ -6,7 +6,8 @@
 #include <IRremote.h>
 #include "HUBOut.h"
 #include "Global.h"
- 
+#include "Injector.h"
+
 class CTLIr {
 
   private:
@@ -15,17 +16,12 @@ class CTLIr {
     int data_pin;
     IRrecv* ir;
     decode_results results;
-    HUBOut* hubOut;
-    CTLRtc* rtc;
-    CTLMenu* menu;
+
     
   public:
 
-    CTLIr(int _data_pin,CTLMenu* _menu,CTLRtc* _rtc,HUBOut* _hubOut){
+    CTLIr(int _data_pin){
       data_pin=_data_pin;
-      hubOut=_hubOut;
-      rtc=_rtc;
-      menu=_menu;
     }
 
     void setup() {
@@ -55,28 +51,28 @@ class CTLIr {
             case 0xFF906F:{
               debug(">>0xFF906F:");
               hubOut->buzz();
-              menu->updateDisplayTmp();        
+              ctlMenu->updateDisplayTmp();        
               break;
             };
             //CH-
             case 0xFFA25D:{ 
               debug(">>0xFFA25D:");
               hubOut->buzz();
-              menu->up();        
+              ctlMenu->up();        
               break;
             };
             //CH
             case 0xFF629D:{
               debug(">>0xFF629D:");
               hubOut->buzz();
-              menu->ok();        
+              ctlMenu->ok();        
               break;
             };
             //CH+
             case 0xFFE21D:{
               debug(">>0xFFE21D");
               hubOut->buzz();
-              menu->down();        
+              ctlMenu->down();        
               break;
             };
         }

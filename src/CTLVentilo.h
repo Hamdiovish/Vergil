@@ -30,8 +30,7 @@
 
   public:
 
-    CTLVentilo(int _power_pin, int _direction_pin,HUBOut* _hubOut
-    );
+    CTLVentilo(int _power_pin, int _direction_pin);
     
     virtual void setup();
 

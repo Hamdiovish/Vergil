@@ -6,20 +6,19 @@
 #include "CTLProtocol.h"
 #include "HUBOut.h"
 #include "Global.h"
- 
+#include "Injector.h"
+
 class CTLLight: public CTLProtocol {
 
   private:
 
     int power_pin;
-    HUBOut *hubOut;   
     boolean enabled=true;
 
   public:
 
-     CTLLight(int _power_pin,HUBOut* _hubOut){
+     CTLLight(int _power_pin){
       power_pin = _power_pin;
-      hubOut=_hubOut;
     }
 
     virtual void setup() {

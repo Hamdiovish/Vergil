@@ -12,14 +12,12 @@ class CTLMainPump: public CTLProtocol {
   private:
 
     int power_pin;
-    HUBOut *hubOut;   
     boolean enabled=true;
 
   public:
 
-     CTLMainPump(int _power_pin,HUBOut* _hubOut){
+     CTLMainPump(int _power_pin){
       power_pin = _power_pin;
-      hubOut=_hubOut;
     }
 
     virtual void setup() {

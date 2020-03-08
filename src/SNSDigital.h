@@ -11,6 +11,7 @@
 
 #include <ShiftIn.h>
 #include "Global.h"
+#include "Injector.h"
 
 class SNSDigital: public SNSProtocol{
 
@@ -25,19 +26,14 @@ class SNSDigital: public SNSProtocol{
 
     ShiftIn<1> shift;
 
-    CTLMainPump* ctlMainPump;
-    CTLSwitchPump* ctlSwitchPump;
-
   public:
 
-    SNSDigital(int _load_pin,int _clock_pin,int _data_pin,CTLMainPump* _ctlMainPump,CTLSwitchPump* _ctlSwitchPump){
+    SNSDigital(int _load_pin,int _clock_pin,int _data_pin){
       load_pin  = _load_pin;
       data_pin  = _data_pin;
       clock_pin = _clock_pin;
       interval=INTERVAL_SNS_DGT;
       latestInterval = 0;
-      ctlMainPump=_ctlMainPump;
-      ctlSwitchPump=_ctlSwitchPump;
     };
     
   virtual void setup() {

@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include <ShiftedLCD.h>
 #include <LiquidMenu.h>
-#include "HUBOut.h"
 #include "SNSDht11.h"
 #include "Config.h"
 #include "Global.h"
@@ -62,7 +61,7 @@ class CTLMenu{
 
   public:
     
-    CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu,HUBOut* __hubOut);
+    CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu);
 
     void setup() ;
 

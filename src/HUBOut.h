@@ -10,6 +10,7 @@
 #include <ShiftPinNo.h>
 #include "SNSMhz19.h"
 #include "Global.h"
+#include "Injector.h"
 
 class HUBOut {
 
@@ -25,25 +26,19 @@ class HUBOut {
     uint32_t buzzerLatestInterval;
 
   public:
-    SNSDht11* dht11;
-    CTLRtc*   rtc;
-    SNSMhz19* mhz;
-
+  
     HUBOut(){
 
     }
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11* _dht11,SNSMhz19* _mhz){
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
-      rtc=_rtc;
 
       sr = new shiftOutX( ss_latch_pin, count_pin, MSBFIRST); //SPI
 
       buzzer_pin = _buzzer_pin;
       buzzerInterval=INTERVAL_CTL_BUZZER;
-      dht11=_dht11;
-      mhz=_mhz;
     };
     
   virtual void setup() {
@@ -98,12 +93,12 @@ class HUBOut {
   }
 
   void updateTime(long time){
-      this->rtc->updateTime(time);
+      ctlRtc->updateTime(time);
   }
   
   void displayTime(char* data){
       debug("displayTime()");
-      this->rtc->getTimeFormatted(data);
+      ctlRtc->getTimeFormatted(data);
   }
 
   void loop(){

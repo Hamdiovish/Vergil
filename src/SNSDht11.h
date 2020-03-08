@@ -6,8 +6,7 @@
 #include "dht.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h"
-//#include "CTLMenu.h"
-//#include "Global.h"
+#include "Injector.h"
 
 
 class SNSDht11: public SNSProtocol {
@@ -17,26 +16,19 @@ class SNSDht11: public SNSProtocol {
     int data_pin;
     int standByMs=2500;
     dht DHT;
-    CTLHeater* ctlHeater;
-    CTLVentilo* ctlVentilo;
     uint32_t interval;
     uint32_t latestInterval;
     bool handlingTemperature;
     bool handlingHumidity;
-    //CTLMenu* lcd;
 
   public:
 
-    SNSDht11(int _data_pin,CTLHeater* _ctlHeater,CTLVentilo* _ctlVentilo//,CTLMenu* _lcd
-    ){
+    SNSDht11(int _data_pin){
       data_pin = _data_pin;
-      ctlHeater = _ctlHeater;
-      ctlVentilo= _ctlVentilo;
       interval=INTERVAL_SNS_DHT;
       latestInterval = 0;
       handlingTemperature=false;
       handlingHumidity=false;
-      //lcd=_lcd;
     };
    
     double getTemperature(){
@@ -83,11 +75,11 @@ class SNSDht11: public SNSProtocol {
     if (millis() - latestInterval >= interval) {
         latestInterval=millis();
         DHT.read11(data_pin);
-        String t_unit="C";
-        String h_unit="%";
-        String display=DHT.temperature+t_unit+" - "+DHT.humidity+h_unit;
-        char* dislayStr="";
-        strcpy(dislayStr, display.c_str()); 
+        //String t_unit="C";
+        //String h_unit="%";
+        //String display=DHT.temperature+t_unit+" - "+DHT.humidity+h_unit;
+        //char* dislayStr="";
+        //strcpy(dislayStr, display.c_str()); 
         //lcd->printAt(0,1,dislayStr);
         handleTemperature(DHT.temperature);
         handleHumidity(DHT.humidity);
@@ -116,7 +108,9 @@ class SNSDht11: public SNSProtocol {
   }
 
   void handleTemperature(double temperature){
-    debug(temperature);
+    debug(">>temperature!");
+    String tmpStr=String(temperature);
+    debug(tmpStr);
 
     if(temperature<=CRASH_MIN_TEMPERATURE||temperature>=CRASH_MAX_TEMPERATURE){
       crashTemperature(temperature);
@@ -128,6 +122,7 @@ class SNSDht11: public SNSProtocol {
         (temperature>=(IDL_TEMPERATURE-IDL_TEMPERATURE_INTERVAL))&&
         (temperature<=(IDL_TEMPERATURE+IDL_TEMPERATURE_INTERVAL))
         ){
+            debug(">>executing:");
             handlingTemperature=false;
             ctlHeater->off();
             ctlVentilo->off();
@@ -177,6 +172,7 @@ class SNSDht11: public SNSProtocol {
     }
     
   void handleHumidity(double humidity){
+    debug(">>humidity:");
     debug(humidity);
 
     if(humidity<=CRASH_MIN_HUMIDITY||humidity>=CRASH_MAX_HUMIDITY){
@@ -189,6 +185,7 @@ class SNSDht11: public SNSProtocol {
         (humidity>=(IDL_HUMIDITY-IDL_HUMIDITY_INTERVAL))&&
         (humidity<=(IDL_HUMIDITY+IDL_HUMIDITY_INTERVAL))
         ){
+          debug(">>executing:");
           handlingHumidity=false;
           ctlHeater->off();
           ctlVentilo->off();
@@ -214,7 +211,9 @@ class SNSDht11: public SNSProtocol {
     else{
       debug("handleHumidity(): IDLE");
       }
+      return;
     }
+
 
 ////////// END HUMIDITY //////////
 
