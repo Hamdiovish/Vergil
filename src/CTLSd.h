@@ -11,12 +11,10 @@ class CTLSd {
 
     int ss_pin;
     boolean enabled=true;
-    CTLMenu* lcd;
   public:
 
-     CTLSd(int _ss_pin,CTLMenu* _lcd){
+     CTLSd(int _ss_pin){
       ss_pin = _ss_pin;
-      lcd = _lcd;
     }
 
      void setup() {

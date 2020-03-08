@@ -20,7 +20,7 @@ class CTLRtc {
     void setup() {
       debug("setup()");
       rtc->begin();
-      debug(getTimeFormattedString());
+      //debug(getTimeFormattedString());
     }
 
 //  printf("%jd seconds since the epoch began\n", (intmax_t)epoch);
@@ -29,7 +29,7 @@ class CTLRtc {
     void updateTime(long time){
         debug("updateTime()");
         rtc->set((time_t)time);
-        debug(getTimeFormatted());
+        //debug(getTimeFormatted());
     }
 
     long getTimestamp(){
@@ -38,13 +38,13 @@ class CTLRtc {
       return long(t);
     }
 
-    char* getTimeFormatted(){
+    void getTimeFormatted(char* result){
       debug("getTimeFormatted()");
       time_t t = rtc->get();
       char buf[40];
       sprintf(buf, "%.2d:%.2d:%.2d %.2d%s%d ",
         hour(t), minute(t), second(t), day(t), monthShortStr(month(t)), year(t));
-      return buf;
+      strcpy(result,buf);
     }
 
     String getTimeFormattedString(){

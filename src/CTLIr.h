@@ -5,7 +5,7 @@
 #include "CTLMenu.h"
 #include <IRremote.h>
 #include "HUBOut.h"
-
+ 
 class CTLIr {
 
   private:
@@ -16,14 +16,15 @@ class CTLIr {
     decode_results results;
     HUBOut* hubOut;
     CTLRtc* rtc;
-    CTLMenu* lcd;
+    CTLMenu* menu;
+    
   public:
 
-    CTLIr(int _data_pin,CTLMenu* _lcd,CTLRtc* _rtc,HUBOut* _hubOut){
+    CTLIr(int _data_pin,CTLMenu* _menu,CTLRtc* _rtc,HUBOut* _hubOut){
       data_pin=_data_pin;
       hubOut=_hubOut;
       rtc=_rtc;
-      lcd=_lcd;
+      menu=_menu;
     }
 
     void setup() {
@@ -36,7 +37,8 @@ class CTLIr {
     void loop(){
       if (ir->decode(&results)){
         switch(results.value){
-          case 0xFFC23D:{ //Recep button FFC23D "Stop/Resume"
+          //Recep button FFC23D "Stop/Resume"
+          case 0xFFC23D:{
             debug(">>0xFFC23D:");
             hubOut->buzz();
             if(SERIAL_ENABLED){
@@ -48,10 +50,32 @@ class CTLIr {
               }
             break;
             };
+            //EQ
             case 0xFF906F:{
               debug(">>0xFF906F:");
               hubOut->buzz();
-              hubOut->displayTime();        
+              menu->updateDisplayTmp();        
+              break;
+            };
+            //CH-
+            case 0xFFA25D:{ 
+              debug(">>0xFFA25D:");
+              hubOut->buzz();
+              menu->up();        
+              break;
+            };
+            //CH
+            case 0xFF629D:{
+              debug(">>0xFF629D:");
+              hubOut->buzz();
+              menu->ok();        
+              break;
+            };
+            //CH+
+            case 0xFFE21D:{
+              debug(">>0xFFE21D");
+              hubOut->buzz();
+              menu->down();        
               break;
             };
         }

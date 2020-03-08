@@ -4,6 +4,7 @@
 #include "SNSProtocol.h" 
 
 #include "SNSDht11.h"
+#include "SNSDht11Light.h"
 #include "SNSDigital.h"
 #include "CTLVentilo.h" 
 #include "CTLHeater.h" 
@@ -21,11 +22,12 @@
 LiquidCrystal _lcd(PIN_ARD_LCD_CS);
 LiquidMenu    _menu(_lcd);
 
-CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu);
 CTLRtc*         ctlRtc        = new CTLRtc();
-CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS,ctlMenu);
+CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
+SNSDht11Light*  snsDht11Light  = new SNSDht11Light(PIN_ARD_SNS_DHT_DATA);
 
-HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,ctlMenu);
+HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER,ctlRtc,snsDht11Light);
+CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu,hubOut);
 
 CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE,hubOut); 
 CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION,hubOut);
@@ -72,7 +74,7 @@ void setup(){
 
 
 void loop(){
-    //snsDht11->loop();
+    snsDht11->loop();
     ctlMenu->loop();
     hubOut->loop();
     snsDigital->loop();

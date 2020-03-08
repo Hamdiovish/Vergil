@@ -3,11 +3,11 @@
 
 #include "Config.h"
 #include "CTLRtc.h"
-#include "CTLMenu.h"
 
 #include <SPI.h>
 #include <ShiftOutX.h>
 #include <ShiftPinNo.h>
+#include "SNSDht11Light.h"
 
 class HUBOut {
 
@@ -23,20 +23,23 @@ class HUBOut {
     uint32_t buzzerLatestInterval;
 
   public:
-
+    SNSDht11Light* dht11;
     CTLRtc* rtc;
-    CTLMenu* menu; 
+    
+    HUBOut(){
 
-    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, CTLMenu* _menu){
+    }
+
+    HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin, CTLRtc* _rtc, SNSDht11Light* _dht11){
       ss_latch_pin = _ss_latch_pin;
       count_pin = _count_pin;
       rtc=_rtc;
-      menu=_menu;
 
       sr = new shiftOutX( ss_latch_pin, count_pin, MSBFIRST); //SPI
 
       buzzer_pin = _buzzer_pin;
       buzzerInterval=INTERVAL_CTL_BUZZER;
+      dht11=_dht11;
     };
     
   virtual void setup() {
@@ -94,13 +97,9 @@ class HUBOut {
       this->rtc->updateTime(time);
   }
   
-  void displayTime(){
+  void displayTime(char* data){
       debug("displayTime()");
-      String s = this->rtc->getTimeFormattedString();
-      char* c="";
-      strcpy(c,s.c_str());
-      debug(c);
-      this->menu->updateDisplay("System Time:",c);
+      this->rtc->getTimeFormatted(data);
   }
 
   void loop(){
