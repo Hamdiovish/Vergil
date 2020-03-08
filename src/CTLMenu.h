@@ -43,24 +43,22 @@ extern class  LiquidLine* settings_option_line_1;
 extern class  LiquidLine* settings_option_line_2;
 extern class  LiquidLine* settings_option_line_3;
 
-void selectedCo2();
+extern boolean enabled;
+extern boolean autoBackstepRequest;
+extern long lastMs_nextScreen;
+extern long period_nextScreen;
 
-void selectedHumidity();
-
-void selectedTemperature();
-
-void selectedTime();
-
-void selectedGoSensors();
-
-void selectedGoWelcome();
-
-void selectedGoMain();
+extern char* line1;
+extern char* line2;
 
 class CTLMenu{
 
   public:
     
+    LiquidMenu* menu;
+  
+    LiquidCrystal* lcd; 
+
     CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu);
 
     void setup() ;

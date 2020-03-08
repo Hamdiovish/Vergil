@@ -22,7 +22,6 @@ class CTLSd {
       digitalWrite(ss_pin,HIGH);
       if (!SD.begin(ss_pin)) {
         debug("initialization failed!");
-        while (1);
       }
       debug("initialization done.");
     }

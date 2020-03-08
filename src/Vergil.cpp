@@ -75,7 +75,7 @@ void setup(){
   snsDht11->setup();
   snsDigital->setup();
 
-  //ctlSd->setup();
+  ctlSd->setup();
   ctlRtc->setup();
   ctlIr->setup();
 

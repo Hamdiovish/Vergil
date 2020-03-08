@@ -5,6 +5,7 @@
 #include "SNSDht11.h"
 #include "Global.h"
 #include "Injector.h"
+#include "CTLMenuListner.h"
 
 
 boolean enabled=true;
@@ -49,115 +50,6 @@ char* line2="Data value";
  LiquidLine* settings_option_line_2;
  LiquidLine* settings_option_line_3;
 
-void selectedOptionIp(){
-      Serial.println(">>selectedOptionIp:");
-      line1="IP:";
-      String str= "192.168.4.1";
-      strcpy(line2, str.c_str()); 
-      menu->change_screen(data_screen);
-      menu->update();
-      back_screen=settings_screen;
-      autoBackstepRequest=true;
-      lastMs_nextScreen=millis();
-}
-
-void selectedCo2(){
-      Serial.println(">>selectedCo2:");
-      line1="Co2:";
-      double co2=snsMhz->getCo2();
-      String str= String(co2);
-      str+="ppm";
-      strcpy(line2, str.c_str()); 
-      menu->change_screen(data_screen);
-      menu->update();
-      back_screen=sensors_screen;
-      autoBackstepRequest=true;
-      lastMs_nextScreen=millis();
-}
-
-void selectedHumidity(){
-      Serial.println(">>selectedHumidity:");
-      line1="Humidity:";
-      double display=snsDht11->getHumidity();
-      String str= String(display);
-      str+="%";
-      strcpy(line2, str.c_str()); 
-      menu->change_screen(data_screen);
-      menu->update();
-      back_screen=sensors_screen;
-      autoBackstepRequest=true;
-      lastMs_nextScreen=millis();
-}
-
-void selectedTemperature(){
-      Serial.println(">>selectedTemperature:");
-      line1="Temperature:";
-      double display=snsDht11->getTemperature();
-      String str= String(display);
-      str+="C";
-      strcpy(line2, str.c_str()); 
-      menu->change_screen(data_screen);
-      menu->update();
-      back_screen=sensors_screen;
-      autoBackstepRequest=true;
-      lastMs_nextScreen=millis();
-}
-
-void selectedTime(){
-      Serial.println(">>selectedTime:");
-      line1="Time:";
-      hubOut->displayTime(line2);
-      menu->change_screen(data_screen);
-      menu->update();
-      back_screen=sensors_screen;
-      autoBackstepRequest=true;
-      lastMs_nextScreen=millis();
-}
-
-void selectedGoSensors(){
-      Serial.println(">>selectedGoSensors():");
-      menu->change_screen(sensors_screen);
-      menu->set_focusedLine(0);
-      menu->update();
-}
-void selectedGoSettings(){
-      Serial.println(">>selectedGoSettings():");
-      menu->change_screen(settings_screen);
-      menu->set_focusedLine(0);
-      menu->update();
-}
-
-void selectedGoWelcome(){
-      Serial.println(">>selectedGoWelcome():");
-      menu->change_screen(welcome_screen);
-      menu->set_focusedLine(0);
-      menu->update();
-}
-
-void selectedSettingsExit(){
-      Serial.println(">>selectedSettingsExit():");
-      menu->change_screen(main_screen);
-      menu->update();
-}
-
-void selectedSensorsExit(){
-      Serial.println(">>selectedSensorsExit():");
-      menu->change_screen(main_screen);
-      menu->update();
-}
-
-void selectedMainExit(){
-      Serial.println(">>selectedMainExit():");
-      menu->change_screen(welcome_screen);
-      menu->update();
-}
-
-void selectedGoMain(){
-      Serial.println(">>selectedGoMain():");
-      menu->change_screen(main_screen);
-      menu->set_focusedLine(0);
-      menu->update();
-}
 
  CTLMenu::CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu){
   lcd=_lcd;
