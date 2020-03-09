@@ -8,52 +8,18 @@
 #include "CTLMenuListner.h"
 
 
-boolean enabled=true;
-boolean autoBackstepRequest=false;
-long lastMs_nextScreen=0;
-long period_nextScreen=3000;
-
-char* line1="Data title";
-char* line2="Data value";
-
- LiquidCrystal* lcd; 
- LiquidMenu* menu;
- LiquidScreen* welcome_screen;
- LiquidScreen* data_screen;
- LiquidScreen* main_screen;
- LiquidScreen* sensors_screen;
- LiquidScreen* settings_screen;
- LiquidScreen* back_screen;
-
- LiquidLine* welcome_line_1;
- LiquidLine* welcome_line_2;
-
- LiquidLine* data_line_1;
- LiquidLine* data_line_2;
-
- LiquidLine* main_option_line_1;
- LiquidLine* main_option_line_2;
- LiquidLine* main_option_line_3;
- LiquidLine* main_option_line_4;
- LiquidLine* main_option_line_5;
-
- LiquidLine* sensors_option_line_1;
- LiquidLine* sensors_option_line_2;
- LiquidLine* sensors_option_line_3;
- LiquidLine* sensors_option_line_4;
- LiquidLine* sensors_option_line_5;
- LiquidLine* sensors_option_line_6;
- LiquidLine* sensors_option_line_7;
- LiquidLine* sensors_option_line_8;
-
- LiquidLine* settings_option_line_1;
- LiquidLine* settings_option_line_2;
- LiquidLine* settings_option_line_3;
-
 
  CTLMenu::CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu){
   lcd=_lcd;
   menu=_menu;
+
+  boolean enabled=true;
+  boolean autoBackstepRequest=false;
+  long lastMs_nextScreen=0;
+  long period_nextScreen=3000;
+
+  char* line1="Data title";
+  char* line2="Data value";
 }
 
  void CTLMenu::setup() {
@@ -68,6 +34,8 @@ char* line2="Data value";
 
   data_line_1 = new  LiquidLine(0, 0,line1);
   data_line_2 = new  LiquidLine(0, 1,line2);
+  data_line_1->attach_function(1, exitDataScreen);
+  data_line_1->attach_function(1, exitDataScreen);
 
   data_screen = new LiquidScreen(*data_line_1,*data_line_2);
 
@@ -81,7 +49,19 @@ char* line2="Data value";
   menu->add_screen(*data_screen);
   menu->change_screen(welcome_screen);
   menu->set_focusedLine(0);
+  menu->set_focusPosition(Position::RIGHT);
   menu->update();
+}
+
+
+void CTLMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
+      back_screen=current;
+      strcpy(line1, l1.c_str()); 
+      strcpy(line2, l2.c_str()); 
+      data_line_1->attach_function(1, exitDataScreen);
+      data_line_2->attach_function(1, exitDataScreen);
+      menu->change_screen(data_screen);
+      menu->update();
 }
 
 void CTLMenu::ping(){
@@ -103,8 +83,6 @@ void CTLMenu::updateDisplay(char* l1, char* l2){
   line2=l2;
   menu->change_screen(data_screen);
   menu->update();
-  autoBackstepRequest=true;
-  lastMs_nextScreen=millis();
 }
 
 void CTLMenu::updateDisplayTmp(){
@@ -112,19 +90,10 @@ void CTLMenu::updateDisplayTmp(){
   hubOut->displayTime(line2);
   menu->change_screen(data_screen);
   menu->update();
-  autoBackstepRequest=true;
-  lastMs_nextScreen=millis();
+  
 }
 
 void CTLMenu::loop(){
-  if(autoBackstepRequest==true){
-    if (millis() - lastMs_nextScreen > period_nextScreen) {
-      lastMs_nextScreen = millis();
-      menu->change_screen(back_screen);
-      menu->update();
-      autoBackstepRequest=false;
-    }
-  }
 }
 
 
@@ -228,5 +197,4 @@ void CTLMenu::debug(uint8_t message){
     Serial.print("CTLMenu: ");
     Serial.println(message);      
   }
-    
-};
+}

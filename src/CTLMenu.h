@@ -9,56 +9,52 @@
 #include "Global.h"
 #include "CTLMenuListner.h"
 
-extern class  LiquidCrystal* lcd; 
-extern class  LiquidMenu* menu;
-extern class  LiquidScreen* welcome_screen;
-extern class  LiquidScreen* data_screen;
-extern class  LiquidScreen* main_screen;
-extern class  LiquidScreen* sensors_screen;
-extern class  LiquidScreen* settings_screen;
-extern class  LiquidScreen* back_screen;
 
-extern class  LiquidLine* welcome_line_1;
-extern class  LiquidLine* welcome_line_2;
-
-extern class  LiquidLine* data_line_1;
-extern class  LiquidLine* data_line_2;
-
-extern class  LiquidLine* main_option_line_1;
-extern class  LiquidLine* main_option_line_2;
-extern class  LiquidLine* main_option_line_3;
-extern class  LiquidLine* main_option_line_4;
-extern class  LiquidLine* main_option_line_5;
-
-extern class  LiquidLine* sensors_option_line_1;
-extern class  LiquidLine* sensors_option_line_2;
-extern class  LiquidLine* sensors_option_line_3;
-extern class  LiquidLine* sensors_option_line_4;
-extern class  LiquidLine* sensors_option_line_5;
-extern class  LiquidLine* sensors_option_line_6;
-extern class  LiquidLine* sensors_option_line_7;
-extern class  LiquidLine* sensors_option_line_8;
-
-extern class  LiquidLine* settings_option_line_1;
-extern class  LiquidLine* settings_option_line_2;
-extern class  LiquidLine* settings_option_line_3;
-
-extern boolean enabled;
-extern boolean autoBackstepRequest;
-extern long lastMs_nextScreen;
-extern long period_nextScreen;
-
-extern char* line1;
-extern char* line2;
 
 class CTLMenu{
 
   public:
-    
-    LiquidMenu* menu;
-  
-    LiquidCrystal* lcd; 
 
+    LiquidCrystal* lcd; 
+    LiquidMenu* menu;
+
+    LiquidScreen* welcome_screen;
+    LiquidScreen* data_screen;
+    LiquidScreen* main_screen;
+    LiquidScreen* sensors_screen;
+    LiquidScreen* settings_screen;
+    LiquidScreen* back_screen;
+
+    LiquidLine* welcome_line_1;
+    LiquidLine* welcome_line_2;
+
+    LiquidLine* data_line_1;
+    LiquidLine* data_line_2;
+
+    LiquidLine* main_option_line_1;
+    LiquidLine* main_option_line_2;
+    LiquidLine* main_option_line_3;
+    LiquidLine* main_option_line_4;
+    LiquidLine* main_option_line_5;
+
+    LiquidLine* sensors_option_line_1;
+    LiquidLine* sensors_option_line_2;
+    LiquidLine* sensors_option_line_3;
+    LiquidLine* sensors_option_line_4;
+    LiquidLine* sensors_option_line_5;
+    LiquidLine* sensors_option_line_6;
+    LiquidLine* sensors_option_line_7;
+    LiquidLine* sensors_option_line_8;
+
+    LiquidLine* settings_option_line_1;
+    LiquidLine* settings_option_line_2;
+    LiquidLine* settings_option_line_3;
+
+    boolean enabled;
+
+    char* line1;
+    char* line2;
+    
     CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu);
 
     void setup() ;
@@ -92,6 +88,9 @@ class CTLMenu{
     void debug(String message);
     
     void debug(uint8_t message);
+
+    void displayDataScreen(String l1,String l2,LiquidScreen* current);
+
 };
 
 #endif

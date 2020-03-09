@@ -4,6 +4,7 @@
 #include "CTLMenu.h"
 
 void blankFunction();
+void exitDataScreen();
 void selectedGoMain();
 void selectedCo2();
 void selectedHumidity();
