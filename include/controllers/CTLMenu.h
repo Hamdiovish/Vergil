@@ -4,10 +4,10 @@
 #include "Arduino.h"
 #include <ShiftedLCD.h>
 #include <LiquidMenu.h>
-#include "SNSDht11.h"
-#include "Config.h"
-#include "Global.h"
-#include "CTLMenuListner.h"
+#include "sensors/SNSDht11.h"
+#include "utilities/Config.h"
+#include "utilities/Global.h"
+#include "controllers/CTLMenuListner.h"
 
 
 

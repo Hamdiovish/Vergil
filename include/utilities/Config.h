@@ -184,3 +184,4 @@ DATA    A0     (29)23
 
 //platformio lib -g install /root/Arduino/libraries/SD.zip
 //platformio run --target clean
+//\{[*,\],\[ ,\n,a-z,A-Z,->,-,>,=,(,",),;,.,_,:,/]*\}

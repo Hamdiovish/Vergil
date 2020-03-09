@@ -1,28 +1,28 @@
 #include <Arduino.h>
-#include "Config.h"
-#include "CTLProtocol.h"
-#include "SNSProtocol.h" 
+#include "utilities/Config.h"
+#include "protocols/CTLProtocol.h"
+#include "protocols/SNSProtocol.h" 
 
-#include "CTLHeater.h" 
-#include "CTLVentilo.h" 
+#include "controllers/CTLHeater.h" 
+#include "controllers/CTLVentilo.h" 
 
-#include "SNSDht11.h"
-#include "SNSDht11.h"
-#include "SNSMhz19.h"
-#include "SNSDigital.h"
+#include "sensors/SNSDht11.h"
+#include "sensors/SNSDht11.h"
+#include "sensors/SNSMhz19.h"
+#include "sensors/SNSDigital.h"
 
-#include "CTLMainPump.h" 
-#include "CTLSwitchPump.h" 
-#include "CTLLight.h" 
-#include "HUBOut.h"
-#include "CTLSd.h"
-#include "CTLRtc.h"
-#include "CTLIr.h"
-#include "COMWifi.h"
+#include "controllers/CTLMainPump.h" 
+#include "controllers/CTLSwitchPump.h" 
+#include "controllers/CTLLight.h" 
+#include "controllers/HUBOut.h"
+#include "controllers/CTLSd.h"
+#include "controllers/CTLRtc.h"
+#include "controllers/CTLIr.h"
+#include "com/COMWifi.h"
 #include <LiquidMenu.h>
-#include "CTLMenu.h"
-#include "Global.h"
-#include "Injector.h"
+#include "controllers/CTLMenu.h"
+#include "utilities/Global.h"
+#include "utilities/Injector.h"
 
 LiquidCrystal _lcd(PIN_ARD_LCD_CS);
 LiquidMenu    _menu(_lcd);

@@ -1,9 +1,9 @@
 #ifndef CTLVENTILO_H
 #define CTLVENTILO_H
 
-#include "Config.h"
-#include "CTLProtocol.h"
 #include <Arduino.h>
+#include "utilities/Config.h"
+#include "protocols/CTLProtocol.h"
 
 //#include "HUBOut.h"
  

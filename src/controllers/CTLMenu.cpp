@@ -1,11 +1,11 @@
-#include "CTLMenu.h"
-#include "Config.h"
+#include "controllers/CTLMenu.h"
+#include "utilities/Config.h"
 #include <LiquidMenu.h>
-#include "HUBOut.h"
-#include "SNSDht11.h"
-#include "Global.h"
-#include "Injector.h"
-#include "CTLMenuListner.h"
+#include "controllers/HUBOut.h"
+#include "sensors/SNSDht11.h"
+#include "utilities/Global.h"
+#include "utilities/Injector.h"
+#include "controllers/CTLMenuListner.h"
 
 
 

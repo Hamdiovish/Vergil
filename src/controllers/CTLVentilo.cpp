@@ -1,8 +1,8 @@
-#include "CTLVentilo.h"
-#include "Config.h"
-#include "CTLProtocol.h"
-#include "HUBOut.h"
-#include "Global.h"
+#include "controllers/CTLVentilo.h"
+#include "utilities/Config.h"
+#include "protocols/CTLProtocol.h"
+#include "controllers/HUBOut.h"
+#include "utilities/Global.h"
 
   /*Relay connection:
   RED: UP: NC

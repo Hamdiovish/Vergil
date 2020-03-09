@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "HUBOut.h"
+#include "controllers/HUBOut.h"
 extern class HUBOut*         hubOut;
 extern class CTLHeater*      ctlHeater;
 extern class CTLVentilo*     ctlVentilo;

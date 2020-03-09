@@ -2,8 +2,8 @@
 #define CTLHEATER_H
 
 #include <Arduino.h>
-#include "Config.h"
-#include "CTLProtocol.h"
+#include "utilities/Config.h"
+#include "protocols/CTLProtocol.h"
  
 class CTLHeater: public CTLProtocol {
 
