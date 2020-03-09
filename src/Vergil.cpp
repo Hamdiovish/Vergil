@@ -17,10 +17,10 @@
 #include "controllers/HUBOut.h"
 #include "controllers/CTLSd.h"
 #include "controllers/CTLRtc.h"
-#include "controllers/CTLIr.h"
+#include "com/COMIr.h"
 #include "com/COMWifi.h"
 #include <LiquidMenu.h>
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
 
@@ -40,7 +40,7 @@ CTLSd*          ctlSd         = new CTLSd(PIN_ARD_SD_CS);
 
 HUBOut*         hubOut        = new HUBOut(PIN_ARD_HUB_OUT_SS_LATCH, HUB_OUT_COUNT,HUB_ENTRY_BUZZER);
 
-CTLMenu*        ctlMenu       = new CTLMenu(&_lcd,&_menu);
+COMMenu*        comMenu       = new COMMenu(&_lcd,&_menu);
 
 CTLMainPump*    ctlMainPump   = new CTLMainPump(HUB_ENTRY_MAIN_PUMP);
 CTLSwitchPump*  ctlSwitchPump = new CTLSwitchPump(HUB_ENTRY_SWITCH_PUMP);
@@ -48,7 +48,7 @@ CTLLight*       ctlLight      = new CTLLight(HUB_ENTRY_LIGHT);
 
 SNSDigital*     snsDigital    = new SNSDigital(PIN_ARD_SNS_DGT_LOAD,PIN_ARD_SNS_DGT_SCLK,PIN_ARD_SNS_DGT_DATA);
 
-CTLIr*           ctlIr         = new CTLIr(PIN_ARD_IR);
+COMIr*           comIr         = new COMIr(PIN_ARD_IR);
 COMWifi*         comWifi       = new COMWifi();
 
 void debug(String message){
@@ -62,7 +62,7 @@ void setup(){
   Serial.begin(9600);
   debug("setup()");
 
-  ctlMenu->setup();
+  comMenu->setup();
 
   hubOut->setup();
 
@@ -77,7 +77,7 @@ void setup(){
 
   ctlSd->setup();
   ctlRtc->setup();
-  ctlIr->setup();
+  comIr->setup();
 
   snsMhz->setup();
   comWifi->setup();
@@ -85,9 +85,9 @@ void setup(){
 
 
 void loop(){
-    ctlMenu->loop();
+    comMenu->loop();
     snsDigital->loop();
-    ctlIr->loop();
+    comIr->loop();
     comWifi->loop();
     hubOut->loop();
     snsDht11->loop();

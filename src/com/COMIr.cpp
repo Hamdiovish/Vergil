@@ -1,23 +1,23 @@
-#include "controllers/CTLIr.h"
+#include "com/COMIr.h"
 #include "utilities/Config.h"
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 #include <IRremote.h>
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
 
-CTLIr::CTLIr(int _data_pin){
+COMIr::COMIr(int _data_pin){
   data_pin=_data_pin;
 }
 
-void CTLIr::setup() {
+void COMIr::setup() {
   debug("setup()");
   ir=new IRrecv(data_pin);
   ir->enableIRIn();
   //hubOut->lcd->printAt(0,1,"Setup IR done!  ");
 }
 
-void CTLIr::loop(){
+void COMIr::loop(){
   if (ir->decode(&results)){
     switch(results.value){
       //Recep button FFC23D "Stop/Resume"
@@ -42,21 +42,21 @@ void CTLIr::loop(){
         case 0xFFA25D:{ 
           debug(">>0xFFA25D:");
           hubOut->buzz();
-          ctlMenu->up();        
+          comMenu->up();        
           break;
         };
         //CH
         case 0xFF629D:{
           debug(">>0xFF629D:");
           hubOut->buzz();
-          ctlMenu->ok();        
+          comMenu->ok();        
           break;
         };
         //CH+
         case 0xFFE21D:{
           debug(">>0xFFE21D");
           hubOut->buzz();
-          ctlMenu->down();        
+          comMenu->down();        
           break;
         };
     }
@@ -65,23 +65,23 @@ void CTLIr::loop(){
   }
 }
 
-void CTLIr::ping(){
+void COMIr::ping(){
     debug("ping()");
 }
 
-void CTLIr::enable(){
+void COMIr::enable(){
   debug("enabled()");
   enabled=true;
 }
 
-void CTLIr::disable(){
+void COMIr::disable(){
   debug("disabled()");
   enabled=false;
 }
 
-void CTLIr::debug(String message){
+void COMIr::debug(String message){
   //if(VG_DEBUG){
-    Serial.print("CTLIr: ");
+    Serial.print("COMIr: ");
     Serial.println(message);      
   // }
 }

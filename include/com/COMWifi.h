@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include "utilities/Config.h"
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 #include "controllers/HUBOut.h"
 #include "utilities/Injector.h"
 

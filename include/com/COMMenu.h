@@ -7,11 +7,11 @@
 #include "sensors/SNSDht11.h"
 #include "utilities/Config.h"
 #include "utilities/Global.h"
-#include "controllers/CTLMenuListner.h"
+#include "com/COMMenuListner.h"
 
 
 
-class CTLMenu{
+class COMMenu{
 
   public:
 
@@ -55,7 +55,7 @@ class CTLMenu{
     char* line1;
     char* line2;
     
-    CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu);
+    COMMenu(LiquidCrystal* _lcd,LiquidMenu* _menu);
 
     void setup() ;
 

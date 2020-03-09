@@ -1,7 +1,7 @@
 #ifndef CTL_MENU_LISTNER_H
 #define CTL_MENU_LISTNER_H
 
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 
 void blankFunction();
 void exitDataScreen();

@@ -1,23 +1,23 @@
 #include "Arduino.h"
 #include "utilities/Injector.h"
 
-#include <controllers/CTLMenuListner.h>
-#include "controllers/CTLMenu.h"
+#include <com/COMMenuListner.h>
+#include "com/COMMenu.h"
 
 void blankFunction(){};
 
 
 void selectedGoMain(){
       Serial.println(">>selectedGoMain():");
-      ctlMenu->menu->change_screen(ctlMenu->main_screen);
-      ctlMenu->menu->set_focusedLine(0);
+      comMenu->menu->change_screen(comMenu->main_screen);
+      comMenu->menu->set_focusedLine(0);
 };
 
 void selectedOptionIp(){
       Serial.println(">>selectedOptionIp:");
       String l1= "IP:";
       String l2= "192.168.4.1";
-      ctlMenu->displayDataScreen(l1,l2,ctlMenu->settings_screen);
+      comMenu->displayDataScreen(l1,l2,comMenu->settings_screen);
 }
 
 
@@ -27,7 +27,7 @@ void selectedCo2(){
       double co2=snsMhz->getCo2();
       String l2= String(co2);
       l2+="ppm";
-      ctlMenu->displayDataScreen(l1,l2,ctlMenu->sensors_screen); 
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
 }
 
 void selectedHumidity(){
@@ -36,7 +36,7 @@ void selectedHumidity(){
       String l1= "Humidity:";
       String l2= String(display);
       l2+="%";      
-      ctlMenu->displayDataScreen(l1,l2,ctlMenu->sensors_screen); 
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
 }
 
 void selectedTemperature(){
@@ -45,7 +45,7 @@ void selectedTemperature(){
       String l2= String(display);
       String l1= "Temperature:";
       l2+="C"; 
-      ctlMenu->displayDataScreen(l1,l2,ctlMenu->sensors_screen); 
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
 }
 
 void selectedTime(){
@@ -54,49 +54,49 @@ void selectedTime(){
       hubOut->displayTime(c);
       String l1= "Time:";
       String l2= String(c);
-      ctlMenu->displayDataScreen(l1,l2,ctlMenu->sensors_screen);
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen);
 }
 
 void selectedGoSensors(){
       Serial.println(">>selectedGoSensors():");
-      ctlMenu->menu->change_screen(ctlMenu->sensors_screen);
-      ctlMenu->menu->set_focusedLine(0);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->sensors_screen);
+      comMenu->menu->set_focusedLine(0);
+      comMenu->menu->update();
 }
 void selectedGoSettings(){
       Serial.println(">>selectedGoSettings():");
-      ctlMenu->menu->change_screen(ctlMenu->settings_screen);
-      ctlMenu->menu->set_focusedLine(0);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->settings_screen);
+      comMenu->menu->set_focusedLine(0);
+      comMenu->menu->update();
 }
 
 void selectedGoWelcome(){
       Serial.println(">>selectedGoWelcome():");
-      ctlMenu->menu->change_screen(ctlMenu->welcome_screen);
-      ctlMenu->menu->set_focusedLine(0);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->welcome_screen);
+      comMenu->menu->set_focusedLine(0);
+      comMenu->menu->update();
 }
 
 void selectedSettingsExit(){
       Serial.println(">>selectedSettingsExit():");
-      ctlMenu->menu->change_screen(ctlMenu->main_screen);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->main_screen);
+      comMenu->menu->update();
 }
 
 void selectedSensorsExit(){
       Serial.println(">>selectedSensorsExit():");
-      ctlMenu->menu->change_screen(ctlMenu->main_screen);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->main_screen);
+      comMenu->menu->update();
 }
 
 void selectedMainExit(){
       Serial.println(">>selectedMainExit():");
-      ctlMenu->menu->change_screen(ctlMenu->welcome_screen);
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->welcome_screen);
+      comMenu->menu->update();
 }
 
 void exitDataScreen(){
       Serial.println(">>exitData():");
-      ctlMenu->menu->change_screen(ctlMenu->back_screen); 
-      ctlMenu->menu->update();
+      comMenu->menu->change_screen(comMenu->back_screen); 
+      comMenu->menu->update();
 }

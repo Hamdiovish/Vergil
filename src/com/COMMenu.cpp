@@ -1,15 +1,15 @@
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 #include "utilities/Config.h"
 #include <LiquidMenu.h>
 #include "controllers/HUBOut.h"
 #include "sensors/SNSDht11.h"
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
-#include "controllers/CTLMenuListner.h"
+#include "com/COMMenuListner.h"
 
 
 
- CTLMenu::CTLMenu(LiquidCrystal* _lcd,LiquidMenu* _menu){
+ COMMenu::COMMenu(LiquidCrystal* _lcd,LiquidMenu* _menu){
   lcd=_lcd;
   menu=_menu;
 
@@ -22,7 +22,7 @@
   char* line2="Data value";
 }
 
- void CTLMenu::setup() {
+ void COMMenu::setup() {
   debug("setup()");
 
   welcome_line_1 = new  LiquidLine(0, 0, "|    VERGIL    |");
@@ -70,7 +70,7 @@
 }
 
 
-void CTLMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
+void COMMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
       back_screen=current;
       strcpy(line1, l1.c_str()); 
       strcpy(line2, l2.c_str()); 
@@ -82,28 +82,28 @@ void CTLMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
       menu->update();
 }
 
-void CTLMenu::ping(){
+void COMMenu::ping(){
    debug("ping()");
 }
 
-void CTLMenu::enable(){
+void COMMenu::enable(){
   debug("enabled()");
   enabled=true;
 }
 
-void CTLMenu::disable(){
+void COMMenu::disable(){
   debug("disabled()");
   enabled=false;
 }
 
-void CTLMenu::updateDisplay(char* l1, char* l2){
+void COMMenu::updateDisplay(char* l1, char* l2){
   line1=l1;
   line2=l2;
   menu->change_screen(data_screen);
   menu->update();
 }
 
-void CTLMenu::updateDisplayTmp(){
+void COMMenu::updateDisplayTmp(){
   line1="Time:";
   hubOut->displayTime(line2);
   menu->change_screen(data_screen);
@@ -111,11 +111,11 @@ void CTLMenu::updateDisplayTmp(){
   
 }
 
-void CTLMenu::loop(){
+void COMMenu::loop(){
 }
 
 
-void CTLMenu::handleSettingsMenu(){
+void COMMenu::handleSettingsMenu(){
   settings_option_line_1 = new  LiquidLine(1, 1, "Ip");
   settings_option_line_2 = new  LiquidLine(1, 1, "Export Data");
   settings_option_line_3 = new  LiquidLine(1, 1, "exit");
@@ -131,7 +131,7 @@ void CTLMenu::handleSettingsMenu(){
   menu->add_screen(*settings_screen);  
 }
 
-void CTLMenu::handleMainMenu(){
+void COMMenu::handleMainMenu(){
   main_option_line_1 = new  LiquidLine(1, 1, "Sensors");
   main_option_line_2 = new  LiquidLine(1, 1, "Controllers");
   main_option_line_3 = new  LiquidLine(1, 1, "Components");
@@ -153,7 +153,7 @@ void CTLMenu::handleMainMenu(){
   menu->add_screen(*main_screen);
 }
 
-void CTLMenu::handleSensorsMenu(){
+void COMMenu::handleSensorsMenu(){
   sensors_option_line_1 = new  LiquidLine(1, 1, "Time");
   sensors_option_line_2 = new  LiquidLine(1, 1, "Temperature");
   sensors_option_line_3 = new  LiquidLine(1, 1, "Humidity");
@@ -185,21 +185,21 @@ void CTLMenu::handleSensorsMenu(){
 } 
 
 
-boolean::CTLMenu::checkNavigationScreen(){
+boolean::COMMenu::checkNavigationScreen(){
   if(menu->get_currentScreen() == data_screen || menu->get_currentScreen() == welcome_screen){
     return false;
   }
   return true;
 }
 
-void CTLMenu::ok(){
+void COMMenu::ok(){
   uint8_t here = menu->get_focusedLine();
   menu->call_function(1);
   debug(">>ok:");
   debug(here);
 }
 
-void CTLMenu::up(){
+void COMMenu::up(){
   if(checkNavigationScreen()){
     menu->switch_focus(false);  
   }else{
@@ -208,7 +208,7 @@ void CTLMenu::up(){
   menu->update();
 }
 
-void CTLMenu::down(){
+void COMMenu::down(){
   if(checkNavigationScreen()){
     menu->switch_focus(true);  
   }else{
@@ -217,21 +217,21 @@ void CTLMenu::down(){
   menu->update();
 }
 
-void CTLMenu::previous(){
+void COMMenu::previous(){
   menu->previous_screen();
   menu->update();
 }
 
-void CTLMenu::debug(String message){
+void COMMenu::debug(String message){
   if(VG_DEBUG){
-    Serial.print("CTLMenu: ");
+    Serial.print("COMMenu: ");
     Serial.println(message);      
   }
 }
 
-void CTLMenu::debug(uint8_t message){
+void COMMenu::debug(uint8_t message){
   if(VG_DEBUG){
-    Serial.print("CTLMenu: ");
+    Serial.print("COMMenu: ");
     Serial.println(message);      
   }
 }

@@ -2,13 +2,13 @@
 #define CTL_IR_H
 
 #include "utilities/Config.h"
-#include "controllers/CTLMenu.h"
+#include "com/COMMenu.h"
 #include <IRremote.h>
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
 
-class CTLIr {
+class COMIr {
 
   private:
 
@@ -20,7 +20,7 @@ class CTLIr {
     
   public:
 
-    CTLIr(int _data_pin);
+    COMIr(int _data_pin);
 
     void setup();
 
