@@ -91,6 +91,8 @@ class CTLMenu{
 
     void displayDataScreen(String l1,String l2,LiquidScreen* current);
 
+    boolean checkNavigationScreen();
+
 };
 
 #endif

@@ -63,7 +63,6 @@ void selectedGoSensors(){
       ctlMenu->menu->set_focusedLine(0);
       ctlMenu->menu->update();
 }
-
 void selectedGoSettings(){
       Serial.println(">>selectedGoSettings():");
       ctlMenu->menu->change_screen(ctlMenu->settings_screen);

@@ -50,8 +50,6 @@ class CTLIr {
             //EQ
             case 0xFF906F:{
               debug(">>0xFF906F:");
-              hubOut->buzz();
-              ctlMenu->updateDisplayTmp();        
               break;
             };
             //CH-
