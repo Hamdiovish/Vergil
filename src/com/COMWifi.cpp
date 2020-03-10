@@ -24,7 +24,7 @@ void COMWifi::loop(){
 
     if (millis() - latestInterval >= interval) {
         latestInterval=millis();
-        //handleEmission();
+        handleEmission();
   }
 }
 
