@@ -180,6 +180,10 @@ DATA    A0     (29)23
 
 //bool SERIAL_ENABLED = true;
 
+////////// END IR ////////
+#define INTERVAL_COM_WIFI_REFRESH_RATE  1000
+////////// END IR ////////
+
 #endif
 
 //platformio lib -g install /root/Arduino/libraries/SD.zip

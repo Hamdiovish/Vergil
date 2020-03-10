@@ -1,6 +1,7 @@
 #ifndef COMWIFI_H
 #define COMWIFI_H
 
+#include <Arduino.h>
 #include <ArduinoJson.h>
 #include <time.h>
 
@@ -12,14 +13,20 @@
 class COMWifi {
 
     private:
-        StaticJsonDocument<200> serialData;
-  
+        StaticJsonDocument<256> serialData;  
+        uint32_t interval;
+        uint32_t latestInterval;
+        
     public:
 
         COMWifi();
         void setup();
 
         void loop();
+
+        void handleReception();
+
+        void handleEmission();
 };
 
 #endif
