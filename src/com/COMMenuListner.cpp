@@ -20,6 +20,26 @@ void selectedOptionIp(){
       comMenu->displayDataScreen(l1,l2,comMenu->settings_screen);
 }
 
+void selectedOptionPh(){
+      Serial.println(">>selectedOptionPh:");
+      String l1= "Ph:";
+      String l2= "5.8";
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen);
+}
+
+void selectedOptionEc(){
+      Serial.println(">>selectedOptionEc:");
+      String l1= "Ec:";
+      String l2= "2.3";
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen);
+}
+
+void selectedOptionLight(){
+      Serial.println(">>selectedOptionLight:");
+      String l1= "Light:";
+      String l2= "6680Lux";
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen);
+}
 
 void selectedCo2(){
       Serial.println(">>selectedCo2:");

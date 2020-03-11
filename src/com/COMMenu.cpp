@@ -37,7 +37,7 @@
   data_line_1 = new  LiquidLine(0, 0,line1);
   data_line_2 = new  LiquidLine(1, 1,line2);
   data_line_1->attach_function(1, exitDataScreen);
-  data_line_1->attach_function(1, exitDataScreen);
+  data_line_2->attach_function(1, exitDataScreen);
 
   data_screen = new LiquidScreen(*data_line_1,*data_line_2);
   data_screen->set_focusPosition(Position::LEFT);
@@ -71,13 +71,17 @@
 
 
 void COMMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
+      Serial.println(">>DATA:");
+      Serial.println(l1);
+      Serial.println(l2);
+
       back_screen=current;
       strcpy(line1, l1.c_str()); 
       strcpy(line2, l2.c_str()); 
       data_line_1->attach_function(1, exitDataScreen);
       data_line_2->attach_function(1, exitDataScreen);
       menu->change_screen(data_screen);
-      data_screen->set_focusPosition(Position::LEFT);
+     // data_screen->set_focusPosition(Position::LEFT);
       menu->set_focusedLine(1);
       menu->update();
 }
@@ -169,9 +173,9 @@ void COMMenu::handleSensorsMenu(){
   sensors_option_line_2->attach_function(1, selectedWaterTemperature);
   sensors_option_line_3->attach_function(1, selectedHumidity);
   sensors_option_line_4->attach_function(1, selectedCo2);
-  sensors_option_line_5->attach_function(1, blankFunction);
-  sensors_option_line_6->attach_function(1, blankFunction);
-  sensors_option_line_7->attach_function(1, blankFunction);
+  sensors_option_line_5->attach_function(1, selectedOptionLight);
+  sensors_option_line_6->attach_function(1, selectedOptionPh);
+  sensors_option_line_7->attach_function(1, selectedOptionEc);
   sensors_option_line_8->attach_function(1, selectedSensorsExit);
   sensors_screen = new LiquidScreen();
   sensors_screen->add_line(*sensors_option_line_1);
