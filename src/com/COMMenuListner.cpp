@@ -49,13 +49,23 @@ void selectedTemperature(){
       comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
 }
 
+
+void selectedWaterTemperature(){
+      Serial.println(">>selectedWaterTemperature:");
+      double display=snsDallas->getTemperature();
+      String l2= String(display);
+      String l1= "Water Temp.:";
+      l2+="C"; 
+      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
+}
+
 void selectedTime(){
       Serial.println(">>selectedTime:");
       char* c="";
       hubOut->displayTime(c);
       String l1= "Time:";
       String l2= String(c);
-      comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen);
+      comMenu->displayDataScreen(l1,l2,comMenu->settings_screen);
 }
 
 void selectedGoSensors(){

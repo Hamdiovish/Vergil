@@ -192,3 +192,12 @@ DATA    A0     (29)23
 //platformio run --target clean
 //\{[*,\],\[ ,\n,a-z,A-Z,->,-,>,=,(,",),;,.,_,:,/]*\}
 //MHZ:platformio lib -g install 6091
+
+
+//////////START DALLAS//////////
+/*
+DALLAS   1284
+DATA     (28)22
+*/
+#define PIN_ARD_SNS_DALLAS 22
+//////////END DALLAS//////////

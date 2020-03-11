@@ -17,5 +17,6 @@ void selectedSettingsExit();
 void selectedGoSettings();
 void selectedMainExit();
 void selectedSensorsExit();
+void selectedWaterTemperature();
 
 #endif

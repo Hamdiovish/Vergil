@@ -45,10 +45,12 @@ class COMMenu{
     LiquidLine* sensors_option_line_6;
     LiquidLine* sensors_option_line_7;
     LiquidLine* sensors_option_line_8;
+    LiquidLine* sensors_option_line_9;
 
     LiquidLine* settings_option_line_1;
     LiquidLine* settings_option_line_2;
     LiquidLine* settings_option_line_3;
+    LiquidLine* settings_option_line_4;
 
     boolean enabled;
 

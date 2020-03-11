@@ -1,4 +1,8 @@
 #include <Arduino.h>
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
 #include "utilities/Config.h"
 #include "protocols/CTLProtocol.h"
 #include "protocols/SNSProtocol.h" 
@@ -10,6 +14,7 @@
 #include "sensors/SNSDht11.h"
 #include "sensors/SNSMhz19.h"
 #include "sensors/SNSDigital.h"
+#include "sensors/SNSDallas.h"
 
 #include "controllers/CTLMainPump.h" 
 #include "controllers/CTLSwitchPump.h" 
@@ -24,15 +29,20 @@
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
 
+
 LiquidCrystal  _lcd(PIN_ARD_LCD_CS);
 LiquidMenu     _menu(_lcd);
 SoftwareSerial _sSerialMhz(PIN_ARD_MHZ_RX,PIN_ARD_MHZ_TX);
 MHZ19          _mhz19;
+OneWire oneWire(PIN_ARD_SNS_DALLAS);
+DallasTemperature _dallas(&oneWire);
 
 CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE); 
 CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION);
 
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA);
+
+SNSDallas*      snsDallas      = new SNSDallas(&_dallas);
 
 SNSMhz19*       snsMhz        = new SNSMhz19(&_mhz19);
 
@@ -75,6 +85,7 @@ void setup(){
   ctlLight->setup();
 
   snsDht11->setup();
+  snsDallas->setup();
   snsDigital->setup();
 
   ctlSd->setup();

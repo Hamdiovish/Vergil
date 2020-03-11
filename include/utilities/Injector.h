@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "controllers/HUBOut.h"
+#include "sensors/SNSDallas.h"
 extern class HUBOut*         hubOut;
 extern class CTLHeater*      ctlHeater;
 extern class CTLVentilo*     ctlVentilo;
@@ -16,3 +17,4 @@ extern class SNSDigital*     snsDigital;
 extern class COMIr*          comIr;
 extern class COMWifi*        comWifi;
 extern class SoftwareSerial _sSerialMhz;
+extern class SNSDallas*      snsDallas;

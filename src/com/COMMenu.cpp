@@ -116,16 +116,19 @@ void COMMenu::loop(){
 
 
 void COMMenu::handleSettingsMenu(){
-  settings_option_line_1 = new  LiquidLine(1, 1, "Ip");
-  settings_option_line_2 = new  LiquidLine(1, 1, "Export Data");
-  settings_option_line_3 = new  LiquidLine(1, 1, "exit");
-  settings_option_line_1->attach_function(1, selectedOptionIp);
-  settings_option_line_2->attach_function(1, blankFunction);
-  settings_option_line_3->attach_function(1, selectedSettingsExit);
+  settings_option_line_1 = new  LiquidLine(1, 1, "Time");
+  settings_option_line_2 = new  LiquidLine(1, 1, "Ip");
+  settings_option_line_3 = new  LiquidLine(1, 1, "Export Data");
+  settings_option_line_4 = new  LiquidLine(1, 1, "exit");
+  settings_option_line_1->attach_function(1, selectedTime);
+  settings_option_line_2->attach_function(1, selectedOptionIp);
+  settings_option_line_3->attach_function(1, blankFunction);
+  settings_option_line_4->attach_function(1, selectedSettingsExit);
   settings_screen = new LiquidScreen();
   settings_screen->add_line(*settings_option_line_1);
   settings_screen->add_line(*settings_option_line_2);
   settings_screen->add_line(*settings_option_line_3);
+  settings_screen->add_line(*settings_option_line_4);
   settings_screen->set_displayLineCount(2);
   settings_screen->set_focusPosition(Position::LEFT);
   menu->add_screen(*settings_screen);  
@@ -154,16 +157,16 @@ void COMMenu::handleMainMenu(){
 }
 
 void COMMenu::handleSensorsMenu(){
-  sensors_option_line_1 = new  LiquidLine(1, 1, "Time");
-  sensors_option_line_2 = new  LiquidLine(1, 1, "Temperature");
+  sensors_option_line_1 = new  LiquidLine(1, 1, "Temperature");
+  sensors_option_line_2 = new  LiquidLine(1, 1, "Water Temp.");
   sensors_option_line_3 = new  LiquidLine(1, 1, "Humidity");
   sensors_option_line_4 = new  LiquidLine(1, 1, "Co2");
   sensors_option_line_5 = new  LiquidLine(1, 1, "Light");
   sensors_option_line_6 = new  LiquidLine(1, 1, "PH");
   sensors_option_line_7 = new  LiquidLine(1, 1, "EC");
   sensors_option_line_8 = new  LiquidLine(1, 1, "Exit");
-  sensors_option_line_1->attach_function(1, selectedTime);
-  sensors_option_line_2->attach_function(1, selectedTemperature);
+  sensors_option_line_1->attach_function(1, selectedTemperature);
+  sensors_option_line_2->attach_function(1, selectedWaterTemperature);
   sensors_option_line_3->attach_function(1, selectedHumidity);
   sensors_option_line_4->attach_function(1, selectedCo2);
   sensors_option_line_5->attach_function(1, blankFunction);
