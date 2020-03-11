@@ -1,12 +1,12 @@
 #include "controllers/HUBOut.h"
 
+#include <SPI.h>
+#include <ShiftOutX.h>
+#include <ShiftPinNo.h>
 #include "utilities/Config.h"
 #include "sensors/SNSDht11.h"
 #include "controllers/CTLRtc.h"
 
-#include <SPI.h>
-#include <ShiftOutX.h>
-#include <ShiftPinNo.h>
 #include "sensors/SNSMhz19.h"
 #include "utilities/Global.h"
 #include "utilities/Injector.h"

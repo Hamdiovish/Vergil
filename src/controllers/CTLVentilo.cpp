@@ -3,6 +3,7 @@
 #include "protocols/CTLProtocol.h"
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
+#include "utilities/Injector.h"
 
   /*Relay connection:
   RED: UP: NC

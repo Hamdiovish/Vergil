@@ -1,5 +1,6 @@
 #include "Arduino.h"
 
+#include "utilities/Config.h"
 #include "controllers/HUBOut.h"
 #include "controllers/CTLHeater.h"
 #include "controllers/CTLVentilo.h"

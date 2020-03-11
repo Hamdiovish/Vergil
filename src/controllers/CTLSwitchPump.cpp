@@ -4,6 +4,7 @@
 #include "protocols/CTLProtocol.h"
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
+#include "utilities/Injector.h"
 
 CTLSwitchPump::CTLSwitchPump(int _power_pin){
   power_pin = _power_pin;

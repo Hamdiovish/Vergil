@@ -2,6 +2,7 @@
 #include "utilities/Config.h"
 #include <DS3232RTC.h>
 #include "utilities/Global.h"
+#include "utilities/Injector.h"
 
 
 CTLRtc::CTLRtc(){

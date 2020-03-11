@@ -4,6 +4,7 @@
 #include "protocols/CTLProtocol.h"
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
+#include "utilities/Injector.h"
 
 
 CTLMainPump::CTLMainPump(int _power_pin){

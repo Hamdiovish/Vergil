@@ -1,7 +1,13 @@
 #include <Arduino.h>
 
+#include <SPI.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <LiquidMenu.h>
+#include <ShiftOutX.h>
+#include <ShiftPinNo.h>
+
+#include "utilities/Injector.h"
 
 #include "utilities/Config.h"
 #include "protocols/CTLProtocol.h"
@@ -24,10 +30,8 @@
 #include "controllers/CTLRtc.h"
 #include "com/COMIr.h"
 #include "com/COMWifi.h"
-#include <LiquidMenu.h>
 #include "com/COMMenu.h"
 #include "utilities/Global.h"
-#include "utilities/Injector.h"
 
 
 LiquidCrystal  _lcd(PIN_ARD_LCD_CS);

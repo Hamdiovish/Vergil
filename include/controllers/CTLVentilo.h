@@ -33,12 +33,9 @@
     CTLVentilo(int _power_pin, int _direction_pin);
     
     virtual void setup();
-
     virtual void on();
-    
     virtual void off();
-
-   virtual void ping();
+    virtual void ping();
    
     void clockWise();
 

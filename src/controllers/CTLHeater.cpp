@@ -3,7 +3,7 @@
 #include "protocols/CTLProtocol.h"
 #include "controllers/HUBOut.h"
 #include "utilities/Global.h"
- #include "utilities/Injector.h"
+#include "utilities/Injector.h"
 
 
   CTLHeater::CTLHeater(int _power_pin,int _idl_temperature, int _min_temperature, int _max_temperature){
@@ -14,15 +14,15 @@
     enabled=true;
 }
 
-  void CTLHeater::CTLHeater::setup() {
+  void CTLHeater::setup() {
 }
 
-  void CTLHeater::CTLHeater::on() {
+  void CTLHeater::on() {
    hubOut->on(power_pin);
   debug("on()");
 }
 
-  void CTLHeater::CTLHeater::off() {
+  void CTLHeater::off() {
    hubOut->off(power_pin);
   debug("off()");
 }
