@@ -68,7 +68,7 @@ DATA     A3     (40)A0
 #define CRASH_MIN_HUMIDITY 60
 #define CRASH_MAX_HUMIDITY 95
 
-#define INTERVAL_SNS_DHT 5000
+#define INTERVAL_SNS_DHT 10000
 //////////END DHT//////////
 
 //////////START HUB OUT - 74HC595 //////////
@@ -90,7 +90,7 @@ HC  ARD      1284
 #define PIN_ARD_HUB_OUT_SS_LATCH    2
 #define INTERVAL_CTL_BUZZER  100
 
-#define HUB_ENTRY_BUZZER                  1
+#define HUB_ENTRY_BUZZER            1
 #define HUB_ENTRY_HEATER            2
 #define HUB_ENTRY_VENTILO_POWER     3
 #define HUB_ENTRY_VENTILO_DIRECTION 4

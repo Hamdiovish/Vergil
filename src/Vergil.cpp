@@ -103,5 +103,5 @@ void loop(){
     comIr->loop();
     comWifi->loop();
     hubOut->loop();
-    snsDht11->loop();
+    //snsDht11->loop();
   };

@@ -67,10 +67,10 @@ void COMWifi::handleReception(){
             Serial.println("has Fan");
             stateFan = serialData["fan"];
             if(stateFan==1){
-            //relayHeater01State=LOW;
-                Serial.println("Heater ON");
+                ctlVentilo->on();
+                Serial.println("Fan ON");
             }else if (stateFan==0){
-                //relayHeater01State=HIGH;
+                ctlVentilo->off();
                 Serial.println("Fan OFF");
             }
         }
@@ -79,10 +79,10 @@ void COMWifi::handleReception(){
             Serial.println("has Direction");
             stateDirection = serialData["direction"];
             if(stateDirection==1){
-            //relayHeater01State=LOW;
+                ctlVentilo->clockWise();
                 Serial.println("Direction ON");
             }else if (stateDirection==0){
-                //relayHeater01State=HIGH;
+                ctlVentilo->antiClockWise();
                 Serial.println("Direction OFF");
             }
         }
@@ -91,10 +91,10 @@ void COMWifi::handleReception(){
             Serial.println("has Heater");
             stateHeater = serialData["heater"];
             if(stateHeater==1){
-            //relayHeater01State=LOW;
+                ctlHeater->on();
                 Serial.println("Heater ON");
             }else if (stateHeater==0){
-                //relayHeater01State=HIGH;
+                ctlHeater->off();
                 Serial.println("Heater OFF");
             }
         } 
@@ -103,10 +103,10 @@ void COMWifi::handleReception(){
             Serial.println("has Light");
             stateLight = serialData["light"];
             if(stateLight==1){
-                //relayLight01State=LOW;
+                ctlLight->on();
                 Serial.println("Light ON");
             }else if (stateLight==0){
-                //relayLight01State=HIGH;
+                ctlLight->off();
                 Serial.println("Light OFF");
             }
         }
