@@ -24,15 +24,17 @@
 #include "utilities/Global.h"
 #include "utilities/Injector.h"
 
-LiquidCrystal _lcd(PIN_ARD_LCD_CS);
-LiquidMenu    _menu(_lcd);
+LiquidCrystal  _lcd(PIN_ARD_LCD_CS);
+LiquidMenu     _menu(_lcd);
+SoftwareSerial _sSerialMhz(PIN_ARD_MHZ_RX,PIN_ARD_MHZ_TX);
+MHZ19          _mhz19;
 
 CTLHeater*      ctlHeater     = new CTLHeater(HUB_ENTRY_HEATER,IDL_TEMPERATURE,MIN_TEMPERATURE,MAX_TEMPERATURE); 
 CTLVentilo*     ctlVentilo    = new CTLVentilo(HUB_ENTRY_VENTILO_POWER, HUB_ENTRY_VENTILO_DIRECTION);
 
 SNSDht11*       snsDht11      = new SNSDht11(PIN_ARD_SNS_DHT_DATA);
 
-SNSMhz19*       snsMhz        = new SNSMhz19(PIN_ARD_MHZ);
+SNSMhz19*       snsMhz        = new SNSMhz19(&_mhz19);
 
 CTLRtc*         ctlRtc        = new CTLRtc();
 

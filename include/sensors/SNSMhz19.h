@@ -1,6 +1,8 @@
 #ifndef SNSMhz19LIGHT_H
 #define SNSMhz19LIGHT_H
-
+                            
+#include <SoftwareSerial.h>  
+#include "MHZ19.h"            
 #include "utilities/Config.h"
 #include "protocols/SNSProtocol.h"
 #include "dht.h"
@@ -16,10 +18,11 @@ class SNSMhz19: public SNSProtocol {
     uint32_t latestInterval;
     bool handlingTemperature;
     bool handlingHumidity;
-
+    MHZ19* mhz;
+  
   public:
 
-  SNSMhz19(int _data_pin);;
+  SNSMhz19(MHZ19* _mhz);
 
   void standBy();
   
@@ -29,7 +32,9 @@ class SNSMhz19: public SNSProtocol {
   
   void debug(double message);
 
-  unsigned long getCo2();
+  int getCo2();
+  
+  void getDeviceInfo();
 
   virtual void setup() ;
 

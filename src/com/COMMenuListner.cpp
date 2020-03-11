@@ -24,9 +24,10 @@ void selectedOptionIp(){
 void selectedCo2(){
       Serial.println(">>selectedCo2:");
       String l1= "Co2:";
-      double co2=snsMhz->getCo2();
-      String l2= String(co2);
+      int co2=snsMhz->getCo2();
+      String l2=String(co2);
       l2+="ppm";
+      Serial.println(l2);
       comMenu->displayDataScreen(l1,l2,comMenu->sensors_screen); 
 }
 

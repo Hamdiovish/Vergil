@@ -164,7 +164,9 @@ RX     7    (17)11
 MH      ARD     1284
 pmw     5       (4)3
 */
-#define PIN_ARD_MHZ 3
+#define PIN_ARD_MHZ_RX 3
+#define PIN_ARD_MHZ_TX 4
+#define MHZ_UART_BAUDRATE 9600
 #define INTERVAL_SNS_MHZ 5000
 //////////END MHZ ////////
 
@@ -181,7 +183,7 @@ DATA    A0     (29)23
 //bool SERIAL_ENABLED = true;
 
 ////////// END IR ////////
-#define INTERVAL_COM_WIFI_REFRESH_RATE  1000
+#define INTERVAL_COM_WIFI_REFRESH_RATE  10000
 ////////// END IR ////////
 
 #endif
@@ -189,3 +191,4 @@ DATA    A0     (29)23
 //platformio lib -g install /root/Arduino/libraries/SD.zip
 //platformio run --target clean
 //\{[*,\],\[ ,\n,a-z,A-Z,->,-,>,=,(,",),;,.,_,:,/]*\}
+//MHZ:platformio lib -g install 6091

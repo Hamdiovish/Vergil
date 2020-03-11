@@ -15,3 +15,4 @@ extern class CTLLight*       ctlLight;
 extern class SNSDigital*     snsDigital;
 extern class COMIr*          comIr;
 extern class COMWifi*        comWifi;
+extern class SoftwareSerial _sSerialMhz;

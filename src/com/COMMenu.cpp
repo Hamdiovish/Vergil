@@ -35,12 +35,12 @@
   welcome_screen->set_focusPosition(Position::CUSTOM);
 
   data_line_1 = new  LiquidLine(0, 0,line1);
-  data_line_2 = new  LiquidLine(0, 1,line2);
+  data_line_2 = new  LiquidLine(1, 1,line2);
   data_line_1->attach_function(1, exitDataScreen);
   data_line_1->attach_function(1, exitDataScreen);
 
   data_screen = new LiquidScreen(*data_line_1,*data_line_2);
-  data_screen->set_focusPosition(Position::CUSTOM);
+  data_screen->set_focusPosition(Position::LEFT);
 
   handleMainMenu();
   handleSensorsMenu();
@@ -77,7 +77,7 @@ void COMMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
       data_line_1->attach_function(1, exitDataScreen);
       data_line_2->attach_function(1, exitDataScreen);
       menu->change_screen(data_screen);
-      data_screen->set_focusPosition(Position::CUSTOM);
+      data_screen->set_focusPosition(Position::LEFT);
       menu->set_focusedLine(1);
       menu->update();
 }
