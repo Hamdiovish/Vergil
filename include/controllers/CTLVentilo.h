@@ -5,10 +5,8 @@
 #include "utilities/Config.h"
 #include "protocols/CTLProtocol.h"
 
-//#include "HUBOut.h"
- 
- class HUBOut;
- class CTLVentilo:public CTLProtocol {
+
+  class CTLVentilo:public CTLProtocol {
 
   private:
 
@@ -25,8 +23,6 @@
   int direction_pin;
   int power_pin;
   int standByMs=5000;
-  HUBOut* hubOut;
-
 
   public:
 
