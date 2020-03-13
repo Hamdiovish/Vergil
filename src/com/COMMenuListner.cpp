@@ -7,6 +7,17 @@
 void blankFunction(){};
 
 
+void selectedGoController(){
+      Serial.println(">>selectedGoController():");
+      comMenu->menu->change_screen(comMenu->controllers_screen);
+      comMenu->menu->set_focusedLine(0);
+};
+
+void selectedGoBackToController(){
+      Serial.println(">>selectedGoBackToController():");
+      comMenu->menu->change_screen(comMenu->controllers_screen);
+};
+
 void selectedGoMain(){
       Serial.println(">>selectedGoMain():");
       comMenu->menu->change_screen(comMenu->main_screen);
@@ -131,3 +142,105 @@ void exitDataScreen(){
       comMenu->menu->change_screen(comMenu->back_screen); 
       comMenu->menu->update();
 }
+
+void controllerFanOn(){
+     ctlVentilo->on(); 
+      selectedGoBackToController();
+}
+void controllerFanOff(){
+     ctlVentilo->off();       
+      selectedGoBackToController();
+}
+
+void controllerFanDirectionOn(){
+      ctlVentilo->clockWise();    
+      selectedGoBackToController();
+}
+void controllerFanDirectionOff(){
+      ctlVentilo->antiClockWise();
+      selectedGoBackToController();
+}
+
+void controllerMainPumpOn(){
+      ctlMainPump->on();
+      selectedGoBackToController();
+}
+void controllerMainPumpOff(){
+      ctlMainPump->off();   
+      selectedGoBackToController();
+}
+
+void controllerSwitchPumpOn(){
+      ctlSwitchPump->on();
+      selectedGoBackToController();
+}
+void controllerSwitchPumpOff(){
+      ctlSwitchPump->off();   
+      selectedGoBackToController();
+}
+
+void controllerLightOn(){
+      ctlLight->on();
+      selectedGoBackToController();
+}
+void controllerLightOff(){
+      ctlLight->off();   
+      selectedGoBackToController();
+}
+
+void controllerHeaterOn(){
+      ctlHeater->on();
+      selectedGoBackToController();
+}
+void controllerHeaterOff(){
+      ctlHeater->off();   
+      selectedGoBackToController();
+}
+
+void selectedControllerFan(){
+      Serial.println(">>selectedControllerFan:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerFanOn,controllerFanOff); 
+};
+
+void selectedControllerFanDirection(){
+      Serial.println(">>selectedControllerFanDirection:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerFanDirectionOn,controllerFanDirectionOn); 
+};
+
+void selectedControllerMainPump(){
+      Serial.println(">>selectedControllerMainPump:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerMainPumpOn,controllerMainPumpOff); 
+};
+
+void selectedControllerSwitchPump(){
+      Serial.println(">>selectedControllerSwitchPump:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerSwitchPumpOn,controllerSwitchPumpOff); 
+};
+
+void selectedControllerLight(){
+      Serial.println(">>selectedControllerLight:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerLightOn,controllerLightOff); 
+};
+
+void selectedControllerHeater(){
+      Serial.println(">>selectedControllerHeater:");
+      String l1= "On";
+      String l2= "Off";
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerHeaterOn,controllerHeaterOff); 
+};
+
+void selectedControllerExit(){
+      Serial.println(">>exitController():");
+      comMenu->menu->change_screen(comMenu->back_screen); 
+      comMenu->menu->update();
+};

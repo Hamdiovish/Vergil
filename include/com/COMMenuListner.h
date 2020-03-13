@@ -22,4 +22,14 @@ void selectedOptionLight();
 void selectedOptionPh();
 void selectedOptionEc();
 
+void selectedControllerFan();
+void selectedControllerFanDirection();
+void selectedControllerMainPump();
+void selectedControllerSwitchPump();
+void selectedControllerLight();
+void selectedControllerHeater();
+void selectedControllerExit();
+
+void selectedGoController();
+
 #endif

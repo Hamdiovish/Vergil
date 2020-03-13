@@ -20,6 +20,9 @@
 
   char* line1="Data title";
   char* line2="Data value";
+
+  char* controllerlLine1="On";
+  char* controllerlLine2="Off";
 }
 
  void COMMenu::setup() {
@@ -38,18 +41,28 @@
   data_line_2 = new  LiquidLine(1, 1,line2);
   data_line_1->attach_function(1, exitDataScreen);
   data_line_2->attach_function(1, exitDataScreen);
+  
+  controller_line_1 = new  LiquidLine(1, 0,controllerlLine1);
+  controller_line_2 = new  LiquidLine(1, 1,controllerlLine2);
+  controller_line_1->attach_function(1, blankFunction);
+  controller_line_2->attach_function(1, blankFunction);
 
   data_screen = new LiquidScreen(*data_line_1,*data_line_2);
   data_screen->set_focusPosition(Position::LEFT);
 
+  controller_screen = new LiquidScreen(*controller_line_1,*controller_line_2);
+  controller_screen->set_focusPosition(Position::LEFT);
+
   handleMainMenu();
   handleSensorsMenu();
   handleSettingsMenu();
+  handleControllersMenu();
   
   lcd->begin(16, 2);
 
   menu->add_screen(*welcome_screen);
   menu->add_screen(*data_screen);
+  menu->add_screen(*controller_screen);
   menu->change_screen(welcome_screen);
   menu->set_focusedLine(0);
   /*
@@ -70,6 +83,21 @@
 }
 
 
+void COMMenu::displayControllerScreen(String l1,String l2,LiquidScreen* current, void (*on)(void), void (*off)(void)){
+      Serial.println(">>Conroller:");
+      Serial.println(l1);
+      Serial.println(l2);
+
+      back_screen=current;
+      strcpy(controllerlLine1, l1.c_str()); 
+      strcpy(controllerlLine2, l2.c_str()); 
+      controller_line_1->attach_function(1, on);
+      controller_line_2->attach_function(1, off);
+      menu->change_screen(controller_screen);
+     // data_screen->set_focusPosition(Position::LEFT);
+      menu->set_focusedLine(0);
+      menu->update();
+}
 void COMMenu::displayDataScreen(String l1,String l2,LiquidScreen* current){
       Serial.println(">>DATA:");
       Serial.println(l1);
@@ -117,7 +145,32 @@ void COMMenu::updateDisplayTmp(){
 
 void COMMenu::loop(){
 }
-
+void COMMenu::handleControllersMenu(){
+  controllers_option_line_1 = new  LiquidLine(1, 1, "Fan");
+  controllers_option_line_2 = new  LiquidLine(1, 1, "Fan direction");
+  controllers_option_line_3 = new  LiquidLine(1, 1, "Main pump");
+  controllers_option_line_4 = new  LiquidLine(1, 1, "Swich pump");
+  controllers_option_line_5 = new  LiquidLine(1, 1, "Light");
+  controllers_option_line_6 = new  LiquidLine(1, 1, "Heater");
+  controllers_option_line_7 = new  LiquidLine(1, 1, "Exit");
+  controllers_option_line_1->attach_function(1, selectedControllerFan);
+  controllers_option_line_2->attach_function(1, selectedControllerFanDirection);
+  controllers_option_line_3->attach_function(1, selectedControllerMainPump);
+  controllers_option_line_4->attach_function(1, selectedControllerSwitchPump);
+  controllers_option_line_5->attach_function(1, selectedControllerLight);
+  controllers_option_line_6->attach_function(1, selectedControllerHeater);
+  controllers_option_line_7->attach_function(1, selectedControllerExit);
+  controllers_screen = new LiquidScreen();
+  controllers_screen->add_line(*controllers_option_line_1);
+  controllers_screen->add_line(*controllers_option_line_2);
+  controllers_screen->add_line(*controllers_option_line_3);
+  controllers_screen->add_line(*controllers_option_line_4);
+  controllers_screen->add_line(*controllers_option_line_5);
+  controllers_screen->add_line(*controllers_option_line_6);
+  controllers_screen->set_displayLineCount(2);
+  controllers_screen->set_focusPosition(Position::LEFT);
+  menu->add_screen(*controllers_screen);  
+}
 
 void COMMenu::handleSettingsMenu(){
   settings_option_line_1 = new  LiquidLine(1, 1, "Time");
@@ -145,7 +198,7 @@ void COMMenu::handleMainMenu(){
   main_option_line_4 = new  LiquidLine(1, 1, "Settings");
   main_option_line_5 = new  LiquidLine(1, 1, "exit");
   main_option_line_1->attach_function(1, selectedGoSensors);
-  main_option_line_2->attach_function(1, blankFunction);
+  main_option_line_2->attach_function(1, selectedGoController);
   main_option_line_3->attach_function(1, blankFunction);
   main_option_line_4->attach_function(1, selectedGoSettings);
   main_option_line_5->attach_function(1, selectedMainExit);
