@@ -167,6 +167,7 @@ void COMMenu::handleControllersMenu(){
   controllers_screen->add_line(*controllers_option_line_4);
   controllers_screen->add_line(*controllers_option_line_5);
   controllers_screen->add_line(*controllers_option_line_6);
+  controllers_screen->add_line(*controllers_option_line_7);
   controllers_screen->set_displayLineCount(2);
   controllers_screen->set_focusPosition(Position::LEFT);
   menu->add_screen(*controllers_screen);  

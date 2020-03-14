@@ -241,6 +241,6 @@ void selectedControllerHeater(){
 
 void selectedControllerExit(){
       Serial.println(">>exitController():");
-      comMenu->menu->change_screen(comMenu->back_screen); 
+      comMenu->menu->change_screen(comMenu->main_screen); 
       comMenu->menu->update();
 };
