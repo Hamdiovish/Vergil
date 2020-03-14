@@ -26,12 +26,12 @@
   }
 
    void CTLVentilo::on() {
-    hubOut->on(power_pin);
+    hubOut->onRelay(power_pin);
     debug("on()");
   }
   
    void CTLVentilo::off() {
-    hubOut->off(power_pin);
+    hubOut->offRelay(power_pin);
     debug("off()");
   }
 
@@ -41,7 +41,7 @@
   
   void CTLVentilo::clockWise(){
     off();
-    hubOut->on(direction_pin);
+    hubOut->onRelay(direction_pin);
     debug("clockWise()");
     standBy();
     on();
@@ -49,7 +49,7 @@
 
   void CTLVentilo::antiClockWise(){
     off();
-    hubOut->off(direction_pin);
+    hubOut->offRelay(direction_pin);
     debug("antiClockWise()");
     standBy();
     on();
@@ -57,7 +57,7 @@
   
   void CTLVentilo::standBy(){
     debug("standBy()");
-  //delay(standByMs);
+    delay(standByMs);
   }
 
   void CTLVentilo::debug(String message){

@@ -18,12 +18,12 @@
 }
 
   void CTLHeater::on() {
-   hubOut->on(power_pin);
+   hubOut->onRelay(power_pin);
   debug("on()");
 }
 
   void CTLHeater::off() {
-   hubOut->off(power_pin);
+   hubOut->offRelay(power_pin);
   debug("off()");
 }
 

@@ -23,8 +23,29 @@ HUBOut::HUBOut(int _ss_latch_pin, int _count_pin, int _buzzer_pin){
 };
 
   void HUBOut::setup() {
-  this->allOff();
+  this->allOffRelay();
 }
+
+void HUBOut::onRelay(int pin){
+  debug("on("+((String)pin)+")");
+  sr->pinOff(pin);
+}
+
+void HUBOut::offRelay(int pin){
+  debug("offRelay("+((String)pin)+")");
+  sr->pinOn(pin);
+}
+
+void HUBOut::allOffRelay(){
+  sr->allOn();
+  sr->pinOff(1);
+}
+
+void HUBOut::allOnRelay(){
+  sr->allOff();
+  sr->pinOn(1);
+}
+
 
 void HUBOut::on(int pin){
   debug("on("+((String)pin)+")");

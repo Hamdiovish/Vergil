@@ -14,12 +14,12 @@ CTLMainPump::CTLMainPump(int _power_pin){
   void CTLMainPump::setup() {}
 
   void CTLMainPump::on() {
-  hubOut->on(power_pin);
+  hubOut->onRelay(power_pin);
   debug("on()");
 }
 
 void CTLMainPump::off() {
-  hubOut->off(power_pin);
+  hubOut->offRelay(power_pin);
   debug("off()");
 }
 

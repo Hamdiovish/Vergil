@@ -14,12 +14,12 @@ CTLSwitchPump::CTLSwitchPump(int _power_pin){
 }
 
   void CTLSwitchPump::on() {
-  hubOut->on(power_pin);
+  hubOut->onRelay(power_pin);
   debug("on()");
 }
 
   void CTLSwitchPump::off() {
-  hubOut->off(power_pin);
+  hubOut->offRelay(power_pin);
   debug("off()");
 }
 

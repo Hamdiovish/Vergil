@@ -15,12 +15,12 @@ CTLLight::CTLLight(int _power_pin){
 }
 
   void CTLLight::on() {
-  hubOut->on(power_pin);
+  hubOut->onRelay(power_pin);
   debug("on()");
 }
 
   void CTLLight::off() {
-  hubOut->off(power_pin);
+  hubOut->offRelay(power_pin);
   debug("off()");
 }
 

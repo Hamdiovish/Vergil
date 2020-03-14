@@ -43,6 +43,15 @@ class HUBOut {
 
   void allOn();
 
+    
+  void onRelay(int pin);
+
+  void offRelay(int pin);
+
+  void allOffRelay();
+
+  void allOnRelay();
+
   uint8_t getState(int pin);
 
   void debug(String message);
