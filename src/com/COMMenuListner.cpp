@@ -208,7 +208,8 @@ void selectedControllerFanDirection(){
       Serial.println(">>selectedControllerFanDirection:");
       String l1= "On";
       String l2= "Off";
-      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerFanDirectionOn,controllerFanDirectionOn); 
+//      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,controllerFanDirectionOn,controllerFanDirectionOn); 
+      comMenu->displayControllerScreen(l1,l2,comMenu->controllers_screen,blankFunction,blankFunction); 
 };
 
 void selectedControllerMainPump(){

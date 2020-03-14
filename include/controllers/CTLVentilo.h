@@ -22,7 +22,7 @@
     
   int direction_pin;
   int power_pin;
-  int standByMs=5000;
+  int standByMs=3000;
 
   public:
 
